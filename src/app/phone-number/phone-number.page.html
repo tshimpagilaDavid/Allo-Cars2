@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>phone-number</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/connexion" text="back">
+        retour
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="logo">
+    <ion-icon name="car"></ion-icon>
+  </div>
+  
+  <ion-card shape="round">
+  
+    <div class="ion-text-center"> 
+      <ion-text class="police">AlloCars</ion-text>
+    </div>
+  
+    <div class="police2">
+      <p class="ion-text-center">Vous conduit vers le futur</p>
+    </div>
+
+    <ion-item lines="none">
+      <ion-label color="black">Nom:</ion-label>
+      <ion-input color="black" [(ngModel)]="displayName" type="displayName"  placeholder="Votre nom complet"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label color="black">password:</ion-label>
+      <ion-input [(ngModel)]="password" color="black" type="password" [type]="showPassword ? 'text' : 'password'" placeholder="Mot de passe"></ion-input>
+      <ion-icon color="black" (click)="togglePassword()" [name]="passwordToggleIcon" slot="end"></ion-icon>
+    </ion-item>
+
+    <ion-grid class="phoneAuthGrid">
+      <ion-row>
+        <ion-col size="4">
+          <ion-select class="phoneCountry" value="brown" okText="Okay" cancelText="Annuler"
+            (ionChange)="countryCodeChange($event)" [value]="CountryCode" [(ngModel)]="CountryCode" placeholder="indicatif">
+            <ion-select-option *ngFor="let country of CountryJson" value={{country.dial_code}}>{{country.dial_code + ' ' + country.name}}</ion-select-option>
+          </ion-select>
+        </ion-col>
+        <ion-col size="8">
+          <ion-input clearInput type="test" placeholder="numéro de téléphone" [(ngModel)]="phoneNumber" class="input ion-padding-horizontal" clear-input="true"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-item>
+        <ion-label>Code de vérification :</ion-label>
+        <ion-input type="text" [(ngModel)]="verificationCode"></ion-input>
+      </ion-item>
+    
+      <ion-button expand="full" (click)="verifyCode()">Vérifier le code de vérification</ion-button>
+
+      <ion-row>
+        <ion-col>
+          <ion-button shape="round" expand="block" color="success" (click)="sendVerificationCode()">
+            Connectez-vous
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <div id="recaptcha-container"></div>
+    </ion-grid>
+  </ion-card>
+
+   
+  
+</ion-content>

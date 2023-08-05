@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Se connecter/S'inscrire</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="logo">
+    <ion-icon name="car"></ion-icon>
+  </div>
+
+  <div class="ion-text-center"> 
+    <ion-text class="police">AlloCars</ion-text>
+  </div>
+
+  <div class="police2">
+    <p class="ion-text-center">Vous conduit vers le futur</p>
+  </div>
+ 
+
+  
+  
+  <ion-card shape="round">
+    <ion-segment (ionChange)="segmentChanged($event)" value="Se connecter">
+      <ion-segment-button value="Se connecter">
+        <ion-label color="dark">Se connecter</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Inscription">
+        <ion-label color="dark">S'inscrire</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div *ngIf="selectedSegment == 'Se connecter'">
+      <ion-item lines="none">
+        <ion-icon name="mail-outline" slot="start"></ion-icon>
+        <ion-input type="displayName" type="email" [(ngModel)]="dataUser.displayName" [(ngModel)]="dataUser.email" color="black" placeholder="Nom d'utilisateur ou e-mail"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+        <ion-input [(ngModel)]="dataUser.password" [type]="showPassword ? 'text' : 'password'" color="black" type="password" placeholder="Mot de passe"></ion-input>
+        <ion-icon (click)="togglePassword()" [name]="passwordToggleIcon" color="black" slot="end"></ion-icon>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label>Accéder en tant que:</ion-label>
+        <ion-button shape="round" fill="outline" color="dark" slot="end" routerLink="/tabs">Inviter</ion-button>
+      </ion-item>
+      <ion-row>  
+        <ion-col>
+          <ion-button (click)="login()" color="dark" shape="round" expand="block">Se connecter</ion-button>
+          <div class="flex">
+            <ion-button shape="round" color="success">
+              <ion-icon slot="start" name="call-outline"></ion-icon>
+              Numéro
+            </ion-button>
+            <ion-button (click)="signInWithGoogle2()" color="danger" shape="round">
+              <ion-icon slot="start" name="logo-google"></ion-icon>
+              Google
+            </ion-button>
+          </div>
+          <ion-button class="bleu" shape="round" expand="block">
+            <ion-icon slot="start" name="logo-facebook"></ion-icon>
+            facebook
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </div>  
+    
+    <div *ngIf="selectedSegment == 'Inscription'">
+      <ion-item lines="none">
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        <ion-input [(ngModel)]="dataUser.displayName" [(ngModel)]="displayName" color="black" type="displayName" placeholder="Nom d'utilisateur"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon name="mail-outline" slot="start"></ion-icon>
+        <ion-input  [(ngModel)]="dataUser.email" [(ngModel)]="email" type="email" color="black" placeholder="E-mail"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+        <ion-input (ionChange)="checkPassword()" [(ngModel)]="dataUser.password" [(ngModel)]="password" [type]="showPassword ? 'text' : 'password'" color="black" type="password" placeholder="Mot de passe"></ion-input>
+        <ion-icon  (click)="togglePassword()" [name]="passwordToggleIcon" color="black" slot="end"></ion-icon>
+      </ion-item>
+      <ion-note *ngIf="showPasswordMessage" color="danger" class="password-message">
+        Le mot de passe doit comporter au moins 6 caractères.
+      </ion-note>
+
+      <ion-row>  
+        <ion-col>
+          <ion-button color="dark"shape="round" (click)="signUp()" expand="block">S'inscrire</ion-button>
+          <div class="flex">
+            <ion-button routerLink="/phone-number" shape="round" color="success">
+              <ion-icon slot="start" name="call-outline"></ion-icon>
+              Numéro
+            </ion-button>
+            <ion-button (click)="signInWithGoogle()" color="danger" shape="round">
+              <ion-icon slot="start" name="logo-google"></ion-icon>
+              Google
+            </ion-button>
+          </div>
+          <ion-button (click)="loginWithFacebook()" class="bleu" shape="round" expand="block">
+            <ion-icon slot="start" name="logo-facebook"></ion-icon>
+            facebook
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-card> 
+
+  
+</ion-content>

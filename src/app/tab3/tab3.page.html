@@ -1,17 +1,46 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="dark">
     <ion-title>
-      Tab 3
+      Mon Compte
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+
+<ion-content [fullscreen]="true">
+  <div class="header"></div>
+
+  <div class="flex"> 
+    <div class="border-black">
+      <div class="border-blanc">
+        <img [src]="image"/>
+      </div>
+    </div>  
+  </div>
+  <ion-button (click)="addPhoto()" class="img-box" color="dark">
+    <ion-icon name="camera-outline"></ion-icon>
+  </ion-button>
+  <ion-card>
+    <ion-card-content *ngIf="(user | async) as userData">
+      <ion-list>
+        <ion-item>
+          <ion-label>Nom:</ion-label>
+          <ion-note>{{ userData.displayName ? userData.displayName : 'Aucun' }}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Email:</ion-label>
+          <ion-note>{{ userData.email ? userData.email : 'Aucun' }}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Numéro de téléphone:</ion-label>
+          <ion-note>{{ userData.phoneNumber ? userData.phoneNumber : 'Aucun' }}</ion-note>
+        </ion-item>
+        <!-- Ajoutez d'autres propriétés de l'utilisateur si nécessaire -->
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-button (click)="uploadFirebase()" expand="block" shape="round" color="dark">
+    <ion-label>Enregistrer les changements</ion-label>
+  </ion-button>
 </ion-content>

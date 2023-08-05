@@ -1,0 +1,38 @@
+.image-container {
+  position: relative;
+  padding-bottom: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.button-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.button-top {
+  margin-bottom: 10px;
+}
+
+.button-bottom {
+  margin-top: 10px;
+}
+
+.button {
+  -webkit-animation: tracking-in-expand 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+	animation: tracking-in-expand 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+  @keyframes tracking-in-expand{0%{letter-spacing:-.5em;opacity:0}40%{opacity:.6}100%{opacity:1}}
+}

@@ -1,0 +1,13 @@
+ion-content{
+    --ion-background-color: black;
+
+}  
+
+.logo ion-icon {
+    height: 250px;
+    position: absolute;
+    font-size: 12em;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
