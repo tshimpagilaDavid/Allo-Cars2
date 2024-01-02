@@ -16,7 +16,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
 import { Camera } from '@ionic-native/camera/ngx';
 import { Facebook } from '@ionic-native/facebook/ngx';
-import { GoogleMaps } from '@ionic-native/google-maps';
+import { GoogleMaps } from '@ionic-native/google-maps/ngx';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBFwYA5g52Ctj4cb_aW bn EFuIA6Aq4bY3E3s",

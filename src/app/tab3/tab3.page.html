@@ -16,11 +16,12 @@
       <div class="border-blanc">
         <img [src]="image"/>
       </div>
+      <ion-button (click)="addPhoto()" color="dark">
+        <ion-icon name="camera-outline"></ion-icon>
+      </ion-button>
     </div>  
   </div>
-  <ion-button (click)="addPhoto()" class="img-box" color="dark">
-    <ion-icon name="camera-outline"></ion-icon>
-  </ion-button>
+
   <ion-card>
     <ion-card-content *ngIf="(user | async) as userData">
       <ion-list>

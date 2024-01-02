@@ -1,11 +1,6 @@
 import { Component } from '@angular/core';
-import {
-  GoogleMaps,
-  GoogleMap,
-  GoogleMapsEvent,
-  LatLng,
-  Marker,
-} from '@ionic-native/google-maps';
+import { GoogleMaps, GoogleMap, GoogleMapsEvent, LatLng, Marker, } from '@ionic-native/google-maps/ngx';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -13,12 +8,15 @@ import {
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-  map: any = null;
+  map?: GoogleMap;
 
   constructor(
-    private googleMaps: GoogleMaps
+    private googleMaps: GoogleMaps,
+    private platform: Platform
     ) {
-    this.map = null;
+      this.platform.ready().then(() => {
+        this.loadMap();
+      });
   }
 
   async loadMap() {

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>phone-number</ion-title>
+    <ion-title>Inscription par numéro de téléphone</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/connexion" text="back">
         retour
@@ -14,16 +14,16 @@
   <div class="logo">
     <ion-icon name="car"></ion-icon>
   </div>
+
+  <div class="ion-text-center"> 
+    <ion-text class="police">AlloCars</ion-text>
+  </div>
   
-  <ion-card shape="round">
+  <div class="police2">
+    <p class="ion-text-center">Vous conduit vers le futur</p>
+  </div>
   
-    <div class="ion-text-center"> 
-      <ion-text class="police">AlloCars</ion-text>
-    </div>
-  
-    <div class="police2">
-      <p class="ion-text-center">Vous conduit vers le futur</p>
-    </div>
+  <ion-card shape="round">  
 
     <ion-item lines="none">
       <ion-label color="black">Nom:</ion-label>
@@ -47,24 +47,22 @@
           <ion-input clearInput type="test" placeholder="numéro de téléphone" [(ngModel)]="phoneNumber" class="input ion-padding-horizontal" clear-input="true"></ion-input>
         </ion-col>
       </ion-row>
-      <ion-item>
-        <ion-label>Code de vérification :</ion-label>
-        <ion-input type="text" [(ngModel)]="verificationCode"></ion-input>
-      </ion-item>
-    
-      <ion-button expand="full" (click)="verifyCode()">Vérifier le code de vérification</ion-button>
 
       <ion-row>
         <ion-col>
-          <ion-button shape="round" expand="block" color="success" (click)="sendVerificationCode()">
-            Connectez-vous
+          <ion-button expand="full" shape="round" (click)="sendVerificationCode()">
+            recevoir le code d'inscription
           </ion-button>
         </ion-col>
       </ion-row>
+
+      <ion-item>
+        <ion-label>Noter le Code:</ion-label>
+        <ion-input type="text" [(ngModel)]="verificationCode"></ion-input>
+      </ion-item>
+    
+      <ion-button expand="full" shape="round" color="success" (click)="verifyCode()">Vérifier le code d'inscription</ion-button>
       <div id="recaptcha-container"></div>
     </ion-grid>
   </ion-card>
-
-   
-  
 </ion-content>

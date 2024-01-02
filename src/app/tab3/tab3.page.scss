@@ -1,5 +1,5 @@
 .flex {
-    margin-top: -76px;
+    margin-top: -88px;
     display: flex;
     justify-content: center;
 }
@@ -11,18 +11,17 @@
 }
 
 .border-black {
+    position: relative;
     border:8px solid black;
     border-radius: 50%;
     width: fit-content;
 }
 
 .img-box {
-    height: 50px;
     width: 50px;
     border-radius: 50%;
     overflow: hidden;
     display: flex;
-    justify-content: center;
     color: black;
 }
 
@@ -39,4 +38,14 @@ img {
     background-color: black;
     height:220px;
     padding-top: 1px;
+}
+
+.border-black ion-button {
+    position: absolute;
+    width: 45px;
+    overflow: hidden;
+    display: flex;
+    bottom: 1px;
+    right: 1px;
+    border-radius: 50%;
 }

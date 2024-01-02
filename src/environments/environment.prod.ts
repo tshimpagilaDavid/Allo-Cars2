@@ -17,5 +17,26 @@ export const environment = {
     { name: 'Gabon', dial_code: '+241', code:'GA' },
     { name: 'Cameroun', dial_code: '+237', code:'CM' },
     { name: 'République Démocratique du Congo', dial_code: '+243', code: 'CD'}
+  ],
+  CityJson: [
+    { name: 'Libreville' },
+    { name: 'Port-Gentil' },
+    { name: 'Franceville' },
+    { name: 'Oyem' }
+  ],
+  CarJson: [
+    { name: 'Toyota' },
+    { name: 'Mitsubishi' },
+    { name: 'Hyunday' },
+    { name: 'Mercedes' },
+    { name: ' Nissan ' },
+    { name: ' Renault ' },
+    { name: ' SsangYong ' },
+    { name: 'LandRover' },
+    { name: ' Jeep ' },
+    { name: 'Mazda' },
+    { name: 'Lexus' },
+    { name: 'Honda' },
+    { name: ' Chevrolet ' }
   ]
 };

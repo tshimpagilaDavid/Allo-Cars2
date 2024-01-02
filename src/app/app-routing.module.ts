@@ -21,6 +21,14 @@ const routes: Routes = [
   {
     path: 'phone-number',
     loadChildren: () => import('./phone-number/phone-number.module').then( m => m.PhoneNumberPageModule)
+  },
+  {
+    path: 'location',
+    loadChildren: () => import('./location/location.module').then( m => m.LocationPageModule)
+  },
+  {
+    path: 'achat-de-vehicule',
+    loadChildren: () => import('./achat-de-vehicule/achat-de-vehicule.module').then( m => m.AchatDeVehiculePageModule)
   }
 ];
 @NgModule({

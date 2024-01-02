@@ -49,7 +49,7 @@
         <ion-col>
           <ion-button (click)="login()" color="dark" shape="round" expand="block">Se connecter</ion-button>
           <div class="flex">
-            <ion-button shape="round" color="success">
+            <ion-button routerLink="/phone-number" shape="round" color="success">
               <ion-icon slot="start" name="call-outline"></ion-icon>
               Numéro
             </ion-button>
@@ -58,7 +58,7 @@
               Google
             </ion-button>
           </div>
-          <ion-button class="bleu" shape="round" expand="block">
+          <ion-button (click)="loginWithFacebook2()" class="bleu" shape="round" expand="block">
             <ion-icon slot="start" name="logo-facebook"></ion-icon>
             facebook
           </ion-button>

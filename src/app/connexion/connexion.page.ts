@@ -51,6 +51,7 @@ export class ConnexionPage implements OnInit {
 
   async loginWithFacebook() {
     try {
+      const accessToken = 'votre_jetoon_dacces_ici';
       const response: FacebookLoginResponse = await this.fb.login(['public_profile', 'email']);
 
       if (response.authResponse) {
@@ -64,6 +65,23 @@ export class ConnexionPage implements OnInit {
           email: user!.email,
           date: new Date().toISOString()
         });
+        console.log('Connecté avec Facebook !');
+      } else {
+        console.log('Échec de la connexion Facebook.');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async loginWithFacebook2() {
+    try {
+      const accessToken = 'votre_jetoon_dacces_ici';
+      const response: FacebookLoginResponse = await this.fb.login(['public_profile', 'email']);
+
+      if (response.authResponse) {
+        const credential = firebase.default.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
+        await this.afAuth.signInWithCredential(credential);
         console.log('Connecté avec Facebook !');
       } else {
         console.log('Échec de la connexion Facebook.');
