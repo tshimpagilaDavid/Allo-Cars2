@@ -12,6 +12,23 @@ ion-content {
   display: block;
 }
 
+swiper-container {
+  width: 100%;
+  height: auto;
+  top: 0;
+  left: 0;
+  margin-bottom: -5px;
+  object-fit: cover;
+  display: block;
+}
+
+swiper-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .box-title {
   color: white;
   margin: 10px 0px 5px 5px;

@@ -13,7 +13,7 @@
 
 <ion-content [fullscreen]="true">
   <img class="img-intro" src="assets/login2.png">
-  <p class="box-title">Nos modèles</p>
+  <p class="box-title">Nos marques</p>
   <br>
   <div class="scroll-box">
 
@@ -95,8 +95,8 @@
     </div>
 
     <div class="model">
-      <img src="assets/MMO.PNG">
-      <p>Mitsubishi Motors</p>
+      <img src="assets/kinshasa.jpg">
+      <p>Luxury Car</p>
     </div>
 
     <div class="model">
@@ -112,6 +112,11 @@
     <div class="model">
       <img src="assets/loxea.PNG">
       <p>Loxea / Avis Fleet Gabon</p>
+    </div>
+
+    <div class="model">
+      <img src="assets/MMO.PNG">
+      <p>Mitsubishi Motors</p>
     </div>
 
     <div class="model">
@@ -158,7 +163,18 @@
   <br>
   <p class="box-title">Nos Offres</p>
   <br>
-  <img class="img-intro" src="assets/AZ.png">
+
+  <swiper-container (slidechange)="swiperSlideChanged($event)" [loop]="true" [pagination]="true">
+    <swiper-slide>
+      <img src="assets/475846.jpg">
+    </swiper-slide>
+    <swiper-slide>
+      <img src="assets/hyundai_palisade_2020_4k-HD.jpg">
+    </swiper-slide>
+    <swiper-slide>
+      <img src="assets/drive.jpg">
+    </swiper-slide>
+  </swiper-container>
 
  
 </ion-content>
