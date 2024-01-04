@@ -2,6 +2,11 @@ ion-content {
   --ion-background-color: var(--ion-color-dark);
 }
 
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
 .img-intro {
   height: auto;
   width: 100%;
@@ -25,8 +30,6 @@ swiper-container {
 swiper-slide {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 .box-title {
@@ -58,4 +61,17 @@ swiper-slide {
   margin: 2px 0px 0px 0px;
   font-weight: 800;
   color: white;
+}
+
+.label {
+  font-size: 14px;
+  margin: -10px 0px 0px 0px;
+  font-weight: 720;
+  color: white;
+}
+ 
+.boot {
+  font-size: 14px;
+  margin: -10px 0px 0px 0px;
+  font-weight: 720;
 }
