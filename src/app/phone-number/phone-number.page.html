@@ -50,17 +50,23 @@
 
       <ion-row>
         <ion-col>
-          <ion-button expand="full" shape="round" (click)="sendVerificationCode()">
+          <ion-button expand="full" color="dark" shape="round" (click)="sendVerificationCode()">
             recevoir le code d'inscription
           </ion-button>
         </ion-col>
       </ion-row>
 
-      <ion-item>
-        <ion-label>Noter le Code:</ion-label>
-        <ion-input type="text" [(ngModel)]="verificationCode"></ion-input>
-      </ion-item>
-    
+      <ion-row>
+        <ion-item lines="none">
+          <ion-col size="8">
+            <ion-label class="label">Entrer le Code de vérification:</ion-label>
+          </ion-col>
+          <ion-col size="4">
+            <ion-input type="test" clearInput placeholder="Notez Ici!" class="input ion-padding-horizontal" clear-input="true" [(ngModel)]="verificationCode"></ion-input>
+          </ion-col> 
+        </ion-item>
+      </ion-row>
+
       <ion-button expand="full" shape="round" color="success" (click)="verifyCode()">Vérifier le code d'inscription</ion-button>
       <div id="recaptcha-container"></div>
     </ion-grid>

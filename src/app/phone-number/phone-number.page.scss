@@ -108,7 +108,7 @@
 
 .phoneAuthGrid {
     border: 1px solid #ccc;
-    margin: 0 7px;
+    margin: -10px;
     border-radius: 3px;
 }
 
@@ -170,3 +170,8 @@
     position: relative;
     color: rgb(175, 172, 172);
 }
+
+.label {
+    font-size: 13px;
+    font-weight: 720;
+  }
