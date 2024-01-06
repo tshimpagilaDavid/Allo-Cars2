@@ -29,6 +29,11 @@ const routes: Routes = [
   {
     path: 'achat-de-vehicule',
     loadChildren: () => import('./achat-de-vehicule/achat-de-vehicule.module').then( m => m.AchatDeVehiculePageModule)
+  },
+  {
+    path: '',
+    redirectTo: 'screen',
+    pathMatch: 'full'
   }
 ];
 @NgModule({
