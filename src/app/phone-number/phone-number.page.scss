@@ -1,3 +1,8 @@
+ion-content {
+    --background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1)),
+    url("/assets/demo2.JPG") no-repeat center center / cover;
+}
+
 .input {
     background-color: rgb(240, 240, 240);
     border: 1px solid rgb(210, 210, 210);

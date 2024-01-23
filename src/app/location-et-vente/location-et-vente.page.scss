@@ -1,22 +1,43 @@
 ion-content {
-  --ion-background-color: var(--ion-color-dark);
+  --background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1)),
+  url("/assets/VX.JPG") no-repeat center center / cover;
 }
 
 .image-container {
   position: relative;
-  padding-bottom: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding-bottom: 93%;
 }
 
-.image {
+.image1 {
   position: absolute;
   display: block;
-  top: 0;
-  left: 0;
-  width: auto;
-  height: 99%;
+  top: 22%;
+  left: 38%;
+  width: 245px;
+  height: 60%;
+}
+
+.image2 {
+  position: absolute;
+  display: block;
+  top: 22%;
+  right: 38%;
+  width: 245px;
+  height: 60%;
+}
+
+.button1 {
+  position: absolute;
+  display: block;
+  right: 38%;
+  height: 40%;
+}
+
+.button2 {
+  position: absolute;
+  display: block;
+  left: 38%;
+  height: 40%;
 }
 
 .button-container {
