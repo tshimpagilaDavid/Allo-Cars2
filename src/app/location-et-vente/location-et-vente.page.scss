@@ -11,38 +11,112 @@ ion-content {
 .image1 {
   position: absolute;
   display: block;
-  top: 22%;
-  left: 38%;
-  width: 245px;
+  top: 18%;
+  left: 36%;
+  width: 265px;
   height: 60%;
+  -webkit-animation: slide-left 0.95s ;
+  animation: slide-left 0.95s ;
+}
+
+@-webkit-keyframes slide-left {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(-100px);
+            transform: translateX(-100px);
+  }
+}
+@keyframes slide-left {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(-100px);
+            transform: translateX(-100px);
+  }
 }
 
 .image2 {
   position: absolute;
   display: block;
-  top: 22%;
+  top: 28%;
   right: 38%;
-  width: 245px;
+  width: 255px;
   height: 60%;
+  -webkit-animation: slide-right 0.95s ;
+  animation: slide-right 0.95s ;
+}
+
+@-webkit-keyframes slide-right {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(100px);
+            transform: translateX(100px);
+  }
+}
+@keyframes slide-right {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(100px);
+            transform: translateX(100px);
+  }
 }
 
 .button1 {
-  position: absolute;
+  position: relative;
   display: block;
-  right: 38%;
-  height: 40%;
+  top: 255px;
+  right: 1%;
+  width: 143px;
+  font-size: 14px;
+  font-weight: 720;
+  -webkit-animation: scale-up-center 3s ;
+  animation: scale-up-center 3s ;
 }
 
 .button2 {
-  position: absolute;
+  position: relative;
   display: block;
-  left: 38%;
-  height: 40%;
+  bottom: -295px;
+  left: 178%;
+  width: 143px;
+  font-size: 14px;
+  font-weight: 720;
+  -webkit-animation: scale-up-center 3s ;
+  animation: scale-up-center 3s ;
 }
 
 .button-container {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+}
+
+@-webkit-keyframes scale-up-center {
+  0% {
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+@keyframes scale-up-center {
+  0% {
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
 }
