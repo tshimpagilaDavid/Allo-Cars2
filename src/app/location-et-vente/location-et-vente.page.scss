@@ -9,14 +9,13 @@ ion-content {
 }
 
 .image1 {
+  border: black;
   position: absolute;
   display: block;
   top: 18%;
-  left: 36%;
+  left: 37%;
   width: 265px;
   height: 60%;
-  -webkit-animation: slide-left 0.95s ;
-  animation: slide-left 0.95s ;
 }
 
 @-webkit-keyframes slide-left {
@@ -40,6 +39,20 @@ ion-content {
   }
 }
 
+.text1 {
+  position: absolute;
+  display: block;
+  right: 63%;
+  bottom: 18%;
+}
+
+.text2 {
+  position: absolute;
+  display: block;
+  left: 72%;
+  top: 45%;
+}
+
 .image2 {
   position: absolute;
   display: block;
@@ -47,8 +60,6 @@ ion-content {
   right: 38%;
   width: 255px;
   height: 60%;
-  -webkit-animation: slide-right 0.95s ;
-  animation: slide-right 0.95s ;
 }
 
 @-webkit-keyframes slide-right {
@@ -75,25 +86,25 @@ ion-content {
 .button1 {
   position: relative;
   display: block;
-  top: 255px;
+  top: 240px;
   right: 1%;
   width: 143px;
   font-size: 14px;
   font-weight: 720;
-  -webkit-animation: scale-up-center 3s ;
-  animation: scale-up-center 3s ;
+  -webkit-animation: scale-up-center 1.75s ;
+  animation: scale-up-center 1.75s ;
 }
 
 .button2 {
   position: relative;
   display: block;
-  bottom: -295px;
-  left: 178%;
+  bottom: -281px;
+  left: 165%;
   width: 143px;
   font-size: 14px;
-  font-weight: 720;
-  -webkit-animation: scale-up-center 3s ;
-  animation: scale-up-center 3s ;
+  font-weight: 780;
+  -webkit-animation: scale-up-center 1.75s ;
+  animation: scale-up-center 1.75s ;
 }
 
 .button-container {
