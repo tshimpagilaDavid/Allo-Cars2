@@ -20,16 +20,19 @@ export class LocationPage implements OnInit {
   constructor(private pickerController: PickerController) { }
 
   async openDatePicker() {
+    const today = new Date ();
+    const tomorrow = new Date (today);
+    tomorrow.setDate(today.getDate() + 1);
     const picker = await this.pickerController.create({
       columns: [
         {
           name: 'start',
-          options: this.getDateOptions(),
+          options: this.getDateOptions(today),
           selectedIndex: 0,
         },
         {
           name: 'end',
-          options: this.getDateOptions(),
+          options: this.getDateOptions(undefined, today),
           selectedIndex: 0,
         }
       ],
@@ -42,7 +45,7 @@ export class LocationPage implements OnInit {
           text: 'sélectionner',
           handler: (value) => {
             this.selectedStartDate = new Date(value.start.value);
-            this.selectedEndDate = new Date(value.end.value);
+            this.selectedEndDate = new Date (value.end.value);
             this.calculateTotalDays();          
           },
         },
@@ -51,12 +54,15 @@ export class LocationPage implements OnInit {
     await picker.present();
   }
 
-  getDateOptions(): { text: string; value: string }[] {
+  getDateOptions(baseData: Date = new Date(), excludeDate?: Date): { text: string; value: string }[] {
     const options = [];
     const today = new Date();
     for (let i = 0; i < 30; i++) {
       const date = new Date (today);
       date.setDate(today.getDate() + i);
+      if (excludeDate && date.toDateString() === excludeDate.toDateString()) {
+        continue;
+      }
       options.push({ text: this.formatDate(date), value: date.toDateString() });
     }
     return options;
@@ -74,12 +80,7 @@ export class LocationPage implements OnInit {
     const startAtCurrentTime = new Date(this.selectedStartDate);
     startAtCurrentTime.setHours(currentDate.getHours(),currentDate.getMinutes(),currentDate.getSeconds(),0);
     const differenceInTime = this.selectedEndDate.getTime() - startAtCurrentTime.getTime();
-    this.TotalDays = Math.round(differenceInTime / millisecondsInDay) + 1;
-  }
-
-  ionViewWillEnter() {
-    const backgroundImage = document.querySelector('.background-image');
-    if (backgroundImage) {}
+    this.TotalDays = Math.round(differenceInTime / millisecondsInDay);
   }
 
   CityNameChange(event: any) {
@@ -92,7 +93,14 @@ export class LocationPage implements OnInit {
     console.log(event.target.value)
   }
 
+  preloadImage() {
+    const image = new Image();
+    image.src = '/assets/demo2.JPG';
+  }
+
+
   ngOnInit() {
+    this.preloadImage
   }
 
 }

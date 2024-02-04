@@ -10,37 +10,40 @@
 </ion-header>
 
 <ion-content>
-  <div class="background-image">
-    <ion-card shape="round">
-      <ion-row >
-        <ion-col size="5">
-          <ion-item type="test">Votre ville</ion-item>
-        </ion-col>
-        <ion-col size="7">
-          <ion-select value="brown" okText="Okay" cancelText="Annuler"
-            (ionChange)="CityNameChange($event)" [value]="CityName">
-            <ion-select-option *ngFor="let city of CityJson" value={{city.name}} class="center-text">{{city.name}}</ion-select-option>
-          </ion-select>
-        </ion-col>
-      </ion-row>
-      <ion-row >
-        <ion-col size="5">
-          <ion-item type="test">Votre marque</ion-item>
-        </ion-col>
-        <ion-col size="6">
-          <ion-select value="brown" okText="Okay" cancelText="Annuler"
-            (ionChange)="CarNameChange($event)" [value]="CarName">
-            <ion-select-option *ngFor="let car of CarJson" value={{car.name}} class="center-text">{{car.name}}</ion-select-option>
-          </ion-select>
-        </ion-col>
-      </ion-row>
-      <ion-item lines="none">
-        <ion-button (click)="openDatePicker()">selectionner vos jours de location</ion-button>
-        <ion-item *ngIf="selectedStartDate && selectedEndDate">
-          <ion-label>Jours total de location:</ion-label> 
-          <ion-text>{{ TotalDays }} </ion-text>
-        </ion-item>
+ 
+  <ion-card shape="round">
+    <ion-row >
+      <ion-col size="5">
+        <ion-item type="test">Votre ville</ion-item>
+      </ion-col>
+      <ion-col size="7">
+        <ion-select value="brown" okText="Okay" cancelText="Annuler"
+          (ionChange)="CityNameChange($event)" [value]="CityName">
+          <ion-select-option *ngFor="let city of CityJson" value={{city.name}} class="center-text">{{city.name}}</ion-select-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+    <ion-row >
+      <ion-col size="5">
+        <ion-item type="test">Votre marque</ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-select value="brown" okText="Okay" cancelText="Annuler"
+          (ionChange)="CarNameChange($event)" [value]="CarName">
+          <ion-select-option *ngFor="let car of CarJson" value={{car.name}} class="center-text">{{car.name}}</ion-select-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+    <br>
+    <br>
+    <div class="flex">
+      <ion-button class="boot" shape="round" color="dark" (click)="openDatePicker()">vos jours de location
+        <ion-icon name="calendar"></ion-icon>
+      </ion-button> 
+      <ion-item class="ion-item-sm" *ngIf="selectedStartDate && selectedEndDate">
+        <ion-label class="label">Jours de location: {{ TotalDays }}</ion-label> 
       </ion-item>
-    </ion-card>
-  </div>
+    </div>
+  </ion-card>
+  
 </ion-content>

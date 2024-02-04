@@ -9,7 +9,13 @@ export class LocationEtVentePage implements OnInit {
 
   constructor() { }
 
+  preloadImage() {
+    const image = new Image();
+    image.src = '/assets/VX.JPG';
+  }
+
   ngOnInit() {
+    this.preloadImage
   }
 
 }
