@@ -20,3 +20,48 @@ ion-content {
     font-size: 13px;
     font-weight: 720;
 }
+
+/* Style pour le conteneur du swiper */
+.swiper-container {
+    width: 100%; /* Pour remplir la largeur de son conteneur parent */
+    height: 100%; /* Pour remplir la hauteur de son conteneur parent */
+}
+  
+  
+/* Style pour chaque slide dans le swiper */
+.swiper-slide {
+    width: 100%; /* Pour remplir la largeur du conteneur swiper */
+    height: 100%; /* Pour remplir la hauteur du conteneur swiper */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Pour cacher tout ce qui dépasse des slides */
+  
+}
+  
+/* Style pour les images dans les slides */
+.swiper-slide img {
+    width: 100%; /* Pour remplir la largeur de chaque slide */
+    height: 100%; /* Pour remplir la hauteur de chaque slide */
+    object-fit: cover; /* Pour ajuster la taille de l'image tout en conservant son ratio d'aspect */
+  
+}
+
+.swiper-pagination-bullet {
+    background-color: white; /* Couleur de fond des boutons de pagination */
+    width: 8px;
+    height: 8px;
+    margin: 0 5px;
+    border-radius: 50%;
+}
+  
+.swiper-button-next,
+ .swiper-button-prev {
+    color: white; /* Couleur des flèches de navigation */
+}
+  
+  /* Optionnel : Ajouter des styles hover pour les flèches de navigation */
+.swiper-button-next:hover,
+  .swiper-button-prev:hover {
+    color: white; /* Couleur des flèches de navigation au survol */
+}

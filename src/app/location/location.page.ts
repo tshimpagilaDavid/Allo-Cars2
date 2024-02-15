@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { PickerController } from '@ionic/angular';
+import { AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { register } from 'swiper/element/bundle';
+register();
+import Swiper from 'swiper';
 
 @Component({
   selector: 'app-location',
@@ -8,7 +13,6 @@ import { PickerController } from '@ionic/angular';
   styleUrls: ['./location.page.scss'],
 })
 export class LocationPage implements OnInit {
-
   CityJson = environment.CityJson;
   CityName: any = 'Libreville';
   CarJson = environment.CarJson;
@@ -18,6 +22,10 @@ export class LocationPage implements OnInit {
   TotalDays!: number;
 
   constructor(private pickerController: PickerController) { }
+
+  swiperSlideChanged(e: any) {
+    console.log('changed: ', e);
+  }
 
   async openDatePicker() {
     const today = new Date ();
@@ -43,7 +51,7 @@ export class LocationPage implements OnInit {
         },
         {
           text: 'sélectionner',
-          handler: (value) => {
+          handler: (value: { start: { value: string | number | Date; }; end: { value: string | number | Date; }; }) => {
             this.selectedStartDate = new Date(value.start.value);
             this.selectedEndDate = new Date (value.end.value);
             this.calculateTotalDays();          
@@ -98,9 +106,37 @@ export class LocationPage implements OnInit {
     image.src = '/assets/demo2.JPG';
   }
 
-
   ngOnInit() {
-    this.preloadImage
+    this.preloadImage;
+    const mySwiper = new Swiper('.swiper-container', {
+      direction: 'horizontal',
+      loop: true,
+      // Activer la navigation précédente et suivante
+      pagination: { // Personnaliser la pagination
+        el: '.swiper-pagination',
+        type: 'bullets',
+        clickable: true,
+      },
+      autoplay: {
+        delay: 3500
+      },
+      slidesPerView: 1, // Une seule image visible à la fois
+      spaceBetween: 0, // Pas d'espace entre les diapositives
+      centeredSlides: true, // Centrer les diapositives
+      effect: 'coverflow',
+      coverflowEffect: {
+        rotate: 50, // Angle de rotation des diapositives
+        stretch: 0, // Agrandissement des diapositives
+        depth: 100, // Profondeur des diapositives
+        modifier: 1, // Vitesse de défilement
+        slideShadows: false, // Ombres des diapositives
+      },
+      navigation: {
+        nextEl: '.swiper-button-next', // Sélecteur de la flèche suivante
+        prevEl: '.swiper-button-prev', // Sélecteur de la flèche précédente
+      }
+      // Ajoutez d'autres options ici
+    });
   }
 
 }

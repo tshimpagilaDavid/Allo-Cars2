@@ -53,8 +53,8 @@
     "ionicons": "^6.0.3",
     "ng-gapi": "^0.0.94",
     "rxjs": "~7.5.0",
-    "swiper": "^11.0.5",
-    "tslib": "^2.3.0",
+    "swiper": "^11.0.6",
+    "tslib": "^2.6.2",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
@@ -71,6 +71,7 @@
     "@ionic/angular-toolkit": "^6.0.0",
     "@types/jasmine": "~4.0.0",
     "@types/node": "^12.11.1",
+    "@types/swiper": "^6.0.0",
     "@typescript-eslint/eslint-plugin": "5.3.0",
     "@typescript-eslint/parser": "5.3.0",
     "cordova-android": "~5.1.1",
@@ -79,6 +80,7 @@
     "cordova-plugin-ionic-webview": "^5.0.0",
     "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-statusbar": "2.4.2",
+    "css-loader": "^6.10.0",
     "eslint": "^7.6.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "30.7.6",
@@ -91,6 +93,7 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "style-loader": "^3.3.4",
     "ts-node": "~8.3.0",
     "typescript": "~4.8.4"
   },
