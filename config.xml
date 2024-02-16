@@ -94,6 +94,10 @@
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
     <platform name="browser">
+      <preference name="SplashScreen" value="Screen" />
+      <preference name="SplashScreenDelay" value="3000" />
+      <preference name="ShowSplashScreen" value="true" />
+      <content src="index.html" />
     </platform>
     <plugin name="cordova-plugin-statusbar" spec="2.4.2" />
     <plugin name="cordova-plugin-device" spec="2.0.2" />
