@@ -11,13 +11,16 @@ import * as firebase from 'firebase/app'; import 'firebase/auth';
   templateUrl: './connexion.page.html',
   styleUrls: ['./connexion.page.scss'],
 })
+
 export class ConnexionPage implements OnInit {
 
   dataUser = {
     displayName: '',
     email: '',
-    password:''
+    password:'',
+    displayNameOrEmail: ''
   };
+
   default: any;
   email!: '';
   password!:'';
@@ -49,6 +52,18 @@ export class ConnexionPage implements OnInit {
     })
   }
 
+  invite() {
+    this.afAuth.authState.subscribe(auth => {
+      if (!auth) {
+        // L'utilisateur n'est pas connecté, donc naviguez vers la page principale
+        this.router.navigateByUrl('/tabs');
+      } else {
+        // L'utilisateur est déjà connecté, rien à faire
+        console.log("L'utilisateur est déjà connecté");
+      }
+    });
+  }
+
   async loginWithFacebook() {
     try {
       const accessToken = 'votre_jetoon_dacces_ici';
@@ -76,18 +91,35 @@ export class ConnexionPage implements OnInit {
 
   async loginWithFacebook2() {
     try {
-      const accessToken = 'votre_jetoon_dacces_ici';
       const response: FacebookLoginResponse = await this.fb.login(['public_profile', 'email']);
-
-      if (response.authResponse) {
+  
+      if (response && response.authResponse) {
         const credential = firebase.default.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
-        await this.afAuth.signInWithCredential(credential);
-        console.log('Connecté avec Facebook !');
+        const fbUser = await this.afAuth.signInWithCredential(credential);
+  
+        if (fbUser && fbUser.user) {
+          // Vérifier si l'utilisateur existe dans Firestore
+          const userDoc = await this.firestore.collection('users').doc(fbUser.user.uid).get().toPromise();
+  
+          if (userDoc!.exists) {
+            console.log('Connecté avec Facebook !');
+            // L'utilisateur est enregistré dans Firestore, vous pouvez effectuer d'autres actions ici
+          } else {
+            // L'utilisateur n'existe pas dans Firestore, déconnectez-le et affichez un message d'erreur
+            console.log('Cet utilisateur n\'est pas enregistré.');
+            await this.afAuth.signOut();
+            // Afficher un message à l'utilisateur pour l'inviter à s'inscrire
+            // Par exemple, vous pouvez utiliser un service d'alerte ou un composant d'alerte Ionic
+            this.showErrorMessage('Veuillez vous inscrire pour accéder à la connexion.');
+          }
+        } else {
+          console.log('Erreur lors de l-authentification Facebook : Utilisateur non trouvé');
+        }
       } else {
-        console.log('Échec de la connexion Facebook.');
+        console.log('Authentification Facebook échouée.');
       }
     } catch (error) {
-      console.error(error);
+      console.error('Erreur lors de la connexion Facebook :', error);
     }
   }
 
@@ -112,11 +144,34 @@ export class ConnexionPage implements OnInit {
   async signInWithGoogle2() {
     try {
       const provider = new firebase.default.auth.GoogleAuthProvider();
-      await this.afAuth.signInWithPopup(provider);
-      // L'utilisateur est maintenant connecté avec Google.
+      const googleUser = await this.afAuth.signInWithPopup(provider);
+  
+      if (googleUser && googleUser.user) {
+        // Vérifier si l'utilisateur existe dans Firestore
+        const userDoc = await this.firestore.collection('users').doc(googleUser.user.uid).get().toPromise();
+  
+        if (userDoc!.exists) {
+          console.log('Connecté avec Google !');
+          // L'utilisateur est enregistré dans Firestore, vous pouvez effectuer d'autres actions ici
+        } else {
+          // L'utilisateur n'existe pas dans Firestore, déconnectez-le et affichez un message d'erreur
+          console.log('Cet utilisateur n\'est pas enregistré.');
+          await this.afAuth.signOut();
+          // Afficher un message à l'utilisateur pour l'inviter à s'inscrire
+          // Par exemple, vous pouvez utiliser un service d'alerte ou un composant d'alerte Ionic
+          this.showErrorMessage('Veuillez vous inscrire pour accéder à la connexion.');
+        }
+      } else {
+        console.log('Authentification Google échouée.');
+      }
     } catch (error) {
       console.error('Erreur lors de la connexion Google :', error);
     }
+  }
+  
+  showErrorMessage(message: string) {
+    // Implémentez ici le code pour afficher un message d'erreur à l'utilisateur
+    alert(message);
   }
 
   segmentChanged(event: any) {
@@ -144,18 +199,45 @@ export class ConnexionPage implements OnInit {
   }
 
   login() {
-    this.afAuth.signInWithEmailAndPassword(this.dataUser.email  || this.dataUser.displayName, this.dataUser.password)
-    .then(auth => {
-      console.log('utilisateur connecté');
-    })
-    .catch(err => {
-      console.log('Erreur: ' + err);
-    });
+    let credentialPromise: Promise<firebase.default.auth.UserCredential>;
+    
+    if (this.dataUser.displayNameOrEmail && this.dataUser.password) {
+      // Utiliser le displayNameOrEmail pour la connexion
+      const isEmailFormat = this.isValidEmail(this.dataUser.displayNameOrEmail);
+      if (isEmailFormat) {
+        // Utiliser l'email pour la connexion
+        credentialPromise = this.afAuth.signInWithEmailAndPassword(this.dataUser.displayNameOrEmail, this.dataUser.password);
+      } else {
+        // Utiliser le displayName pour la connexion
+        credentialPromise = this.afAuth.signInWithEmailAndPassword(this.dataUser.displayNameOrEmail, this.dataUser.password);
+      }
+    } else {
+      console.log('Veuillez saisir votre nom d\'utilisateur ou votre adresse e-mail ainsi que votre mot de passe.');
+      return; // Arrêter l'exécution de la fonction si le displayNameOrEmail ou le mot de passe n'est pas fourni
+    }
+  
+    // Exécuter la promesse pour la connexion
+    credentialPromise
+      .then(auth => {
+        console.log('Utilisateur connecté');
+      })
+      .catch(err => {
+        console.log('Erreur lors de la connexion : ' + err);
+      });
+  
+    // Réinitialiser les données utilisateur
     this.dataUser = {
-      displayName:'',
+      displayNameOrEmail: '',
+      displayName: '',
       email: '',
       password:''
     };
+  }
+  
+  isValidEmail(email: string): boolean {
+    // Vérifier si l'adresse email est correctement formatée
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   }
 
 
@@ -175,6 +257,7 @@ export class ConnexionPage implements OnInit {
       console.log('Erreur: ' + err);
     });
     this.dataUser = {
+      displayNameOrEmail: '',
       displayName: '',
       email: '',
       password:''

@@ -1,6 +1,7 @@
+
 ion-content {
   --background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1)),
-  url("/assets/VX.JPG") no-repeat center center / cover;
+  var("/assets/VX.JPG") no-repeat center center / cover;
 }
 
 .image-container {

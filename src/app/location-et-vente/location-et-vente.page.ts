@@ -7,15 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LocationEtVentePage implements OnInit {
 
-  constructor() { }
+  constructor() {}
 
-  preloadImage() {
-    const image = new Image();
-    image.src = '/assets/VX.JPG';
-  }
-
-  ngOnInit() {
-    this.preloadImage
-  }
+  ngOnInit() {}
 
 }

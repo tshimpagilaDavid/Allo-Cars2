@@ -34,7 +34,7 @@
     <div *ngIf="selectedSegment == 'Se connecter'">
       <ion-item lines="none">
         <ion-icon name="mail-outline" slot="start"></ion-icon>
-        <ion-input type="displayName" type="email" [(ngModel)]="dataUser.displayName" [(ngModel)]="dataUser.email" color="black" placeholder="Nom d'utilisateur ou e-mail"></ion-input>
+        <ion-input type="text"  [(ngModel)]="dataUser.displayNameOrEmail" color="black" placeholder="Nom d'utilisateur ou e-mail"></ion-input>
       </ion-item>
       <ion-item lines="none">
         <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
@@ -43,7 +43,7 @@
       </ion-item>
       <ion-item lines="none">
         <ion-label>Accéder en tant que:</ion-label>
-        <ion-button shape="round" fill="outline" color="dark" slot="end" routerLink="/tabs/tab1">Inviter</ion-button>
+        <ion-button shape="round" fill="outline" color="dark" slot="end" (click)="invite()">Inviter</ion-button>
       </ion-item>
       <ion-row>  
         <ion-col>
