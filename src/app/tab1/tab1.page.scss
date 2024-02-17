@@ -16,6 +16,19 @@ ion-content {
   margin-bottom: -5px;
   object-fit: cover;
   display: block;
+  border-bottom-left-radius: 20px; /* Arrondi le coin inférieur gauche */
+  border-bottom-right-radius: 20px; /* Arrondi le coin inférieur droit */
+  overflow: hidden; /* Masque le débordement du dégradé */
+}
+
+.img-intro::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20px; /* Hauteur de l'effet arrondi */
+  background: linear-gradient(to bottom, transparent, white); /* Dégradé transparent à blanc */
 }
 
 swiper-container {
@@ -74,4 +87,15 @@ swiper-slide {
   margin: -10px 0px 0px 0px;
   font-weight: 720;
   color: black;
+}
+
+.swiper-container-rounded {
+  border-radius: 20px; /* ajustez la valeur selon vos préférences */
+  overflow: hidden; /* pour cacher les coins arrondis qui dépassent */
+}
+
+/* CSS pour limiter la largeur du conteneur */
+.swiper-container-rounded .swiper-wrapper {
+  max-width: 80%; /* ajustez la valeur selon vos préférences */
+  margin: auto; /* pour centrer le conteneur horizontalement */
 }

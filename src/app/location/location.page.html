@@ -46,7 +46,7 @@
     </div>
   </ion-card>
   <br>
-  <ion-card>
+  <ion-card [ngClass]="{'hidden': userEmail !== 'davidtshipangila@gmail.com'}">
     <!-- Partie supérieure pour les photos -->
     <ion-card-content>
       <div class="swiper-container" #slides>
@@ -72,53 +72,127 @@
       <ion-grid>
         <ion-row>
           <ion-col size="6">
-            <h2 class="font">Hyundai</h2>
-            <p>Palissade</p>
+            <h2>marque :</h2>
+            <ion-input class="font" type="text" [(ngModel)]="marque"></ion-input>
+            <p>modele :</p>
+            <ion-input type="text" [(ngModel)]="modele"></ion-input>
           </ion-col>
           <ion-col size="6">
-            <ion-label> 
-              <p>Prix :</p>
+            <p class="ion-text-center">Prix :</p>
+            <ion-item> 
               <ion-icon slot="start" size="large" src="assets/icon/dollar.svg"></ion-icon>
-              action1
-            </ion-label>   
+              <ion-input type="number" [(ngModel)]="prix"></ion-input>
+            </ion-item>   
           </ion-col>
         </ion-row>
-        <br>
         <ion-row>
-          <ion-col size="6">
-            <ion-label class="ion-text-center">
-              <p class="ion-text-center">Moteur :</p>
+          <ion-col size="6"> 
+            <p class="ion-text-center">Boîte :</p>
+            <ion-item>
               <ion-icon slot="start" size="large" src="assets/icon/moteur.svg"></ion-icon>
-              Action 1
-            </ion-label>
+              <ion-input type="text" [(ngModel)]="boite"></ion-input>
+            </ion-item>
           </ion-col>
           <ion-col size="6">
-            <ion-label class="ion-text-center">
-              <p class="ion-text-center">Boîte :</p>
+            <p class="ion-text-center">Carburant :</p>
+            <ion-item>
               <ion-icon slot="start" size="large" src="assets/icon/boîte.svg"></ion-icon>
-              Action 2
-            </ion-label>
+              <ion-input type="text" [(ngModel)]="carburant"></ion-input>
+            </ion-item>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col size="6">
-            <ion-label class="ion-text-center">
-              <p class="ion-text-center">kilométrage :</p>
+            <p class="ion-text-center">kilométrage :</p>
+            <ion-item>
               <ion-icon slot="start" size="large" src="assets/icon/kilométrage.svg"></ion-icon>
-              Action 1
-            </ion-label>
+              <ion-input type="number" [(ngModel)]="kilometrage"></ion-input>
+            </ion-item>
           </ion-col>
           <ion-col size="6">
-            <ion-label class="ion-text-center">
-              <p class="ion-text-center">année :</p>
+            <p class="ion-text-center">année :</p>
+            <ion-item>
               <ion-icon slot="start" size="large" name="calendar-outline"></ion-icon>
-              Action 2
-            </ion-label>
+              <ion-input type="number" [(ngModel)]="annee"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-button (click)="ajouterVoiture()">Ajouter Voiture</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card  *ngFor="let car of cars$ | async">
+    <!-- Partie supérieure pour les photos -->
+    <ion-card-content>
+      <div class="swiper-container" #slides>
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="assets/hyundai_palisade_2020_4k-HD.jpg">
+          </div>
+          <div class="swiper-slide">
+            <img src="assets/hyundai_palisade_2020_4k-HD.jpg">
+          </div>
+          <div class="swiper-slide">
+            <img src="assets/hyundai_palisade_2020_4k-HD.jpg">
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </ion-card-content>
+  
+    <!-- Partie inférieure pour les informations -->
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">
+            <h2 class="font">{{ car.marque }}</h2>
+            <p>{{ car.modele }}</p>
+          </ion-col>
+          <ion-col size="6">
+            <p class="ion-text-center">Prix :</p>
+            <ion-item> 
+              <ion-icon slot="start" size="large" src="assets/icon/dollar.svg"></ion-icon>
+              <ion-input type="number" value="{{ car.prix }}"></ion-input>
+            </ion-item>   
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6"> 
+            <p class="ion-text-center">Boîte :</p>
+            <ion-item>
+              <ion-input type="text" value="{{ car.boite }}"></ion-input>
+              <ion-icon slot="start" size="large" src="assets/icon/moteur.svg"></ion-icon>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <p class="ion-text-center">Carburant :</p>
+            <ion-item>
+              <ion-input type="text" value="{{ car.carburant }}"></ion-input>
+              <ion-icon slot="start" size="large" src="assets/icon/boîte.svg"></ion-icon>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <p class="ion-text-center">kilométrage :</p>
+            <ion-item>
+              <ion-input type="number" value="{{ car.kilometrage }}"></ion-input>
+              <ion-icon slot="start" size="large" src="assets/icon/kilométrage.svg"></ion-icon>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <p class="ion-text-center">année :</p>
+            <ion-item>
+              <ion-input type="number" value="{{ car.annee }}"></ion-input>
+              <ion-icon slot="start" size="large" name="calendar-outline"></ion-icon>
+            </ion-item>
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card-content>
   </ion-card>
-
   
 </ion-content>

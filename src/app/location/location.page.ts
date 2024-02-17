@@ -6,6 +6,18 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { register } from 'swiper/element/bundle';
 register();
 import Swiper from 'swiper';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Observable } from 'rxjs';
+export interface Car {
+  marque: string;
+  modele: string;
+  prix: number;
+  carburant: string;
+  annee: number;
+  kilometrage: number;
+  boite: string;
+}
 
 @Component({
   selector: 'app-location',
@@ -13,6 +25,28 @@ import Swiper from 'swiper';
   styleUrls: ['./location.page.scss'],
 })
 export class LocationPage implements OnInit {
+  cars$: Observable<any[]>;
+  userEmail: string | null = null;
+  ajouterVoiture() {
+    const marque = this.marque;
+    const modele = this.modele;
+    const prix = this.prix;
+    const boite = this.boite;
+    const carburant = this.carburant;
+    const kilometrage = this.kilometrage;
+    const annee = this.annee;
+
+    // Votre logique pour appeler la fonction addCar avec les données appropriées
+    this.addCar(marque, modele, prix, boite, carburant, kilometrage, annee);
+  }
+  marque!: string;
+  modele!: string;
+  carburant!: string;
+  boite!: string;
+  kilometrage!: number;
+  annee!: number;
+  prix!: number;
+
   CityJson = environment.CityJson;
   CityName: any = 'Libreville';
   CarJson = environment.CarJson;
@@ -21,7 +55,45 @@ export class LocationPage implements OnInit {
   selectedEndDate!: Date;
   TotalDays!: number;
 
-  constructor(private pickerController: PickerController) { }
+  constructor(private pickerController: PickerController,private firestore: AngularFirestore,private afAuth: AngularFireAuth) { 
+    this.afAuth.authState.subscribe(user => {
+      // Mettre à jour l'adresse e-mail de l'utilisateur
+      this.userEmail = user ? user.email : null;
+    });
+    this.cars$ = this.firestore.collection('cars').valueChanges();
+    this.cars$.subscribe(cars => {
+      console.log(cars); // Vérifiez les données récupérées depuis Firestore
+    });
+  }
+
+  addCar(marque: string, modele: string, prix: number, boite: string, carburant: string, kilometrage: number, annee: number) {
+    // Référence à la collection "cars" dans Firestore
+    const carsCollectionRef = this.firestore.collection('cars');
+  
+    // Ajouter un document pour la marque de voiture
+    const marqueDocRef = carsCollectionRef.doc(marque);
+  
+    // Ajouter un document pour le modèle de voiture dans la sous-collection "models"
+    const modeleDocRef = marqueDocRef.collection('models').doc(modele);
+  
+    // Données à ajouter pour le modèle de voiture
+    const data = {
+      prix: prix,
+      boite: boite,
+      carburant: carburant,
+      kilometrage: kilometrage,
+      annee: annee
+    };
+  
+    // Ajouter les données dans le document du modèle de voiture
+    modeleDocRef.set(data)
+      .then(() => {
+        console.log('Modèle de voiture ajouté avec succès !');
+      })
+      .catch(error => {
+        console.error('Erreur lors de l\'ajout du modèle de voiture :', error);
+      });
+  }
 
   swiperSlideChanged(e: any) {
     console.log('changed: ', e);
@@ -118,10 +190,10 @@ export class LocationPage implements OnInit {
         clickable: true,
       },
       autoplay: {
-        delay: 3500
+        delay: 6000
       },
       slidesPerView: 1, // Une seule image visible à la fois
-      spaceBetween: 0, // Pas d'espace entre les diapositives
+      spaceBetween: 100, // Pas d'espace entre les diapositives
       centeredSlides: true, // Centrer les diapositives
       effect: 'coverflow',
       coverflowEffect: {
@@ -134,6 +206,15 @@ export class LocationPage implements OnInit {
       navigation: {
         nextEl: '.swiper-button-next', // Sélecteur de la flèche suivante
         prevEl: '.swiper-button-prev', // Sélecteur de la flèche précédente
+      },
+      on: {
+        init: function() {
+          // Retirer la classe 'hidden' des autres swipers
+          const otherSwipers = document.querySelectorAll('.swiper-slide:not(.swiper-slide-active)');
+          otherSwipers.forEach(slide => {
+            slide.classList.remove('hidden');
+          });
+        }
       }
       // Ajoutez d'autres options ici
     });
