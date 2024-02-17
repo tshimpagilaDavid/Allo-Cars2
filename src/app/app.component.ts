@@ -39,7 +39,9 @@ export class AppComponent {
     this.afAuth.signOut();
   }
   retour() {
-    this.menu.close();
-    this.router.navigateByUrl('connexion');
+    if (!this.connected) {
+      this.menu.close();
+      this.router.navigateByUrl('connexion');
+    }
   }
 }

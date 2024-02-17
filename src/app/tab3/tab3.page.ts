@@ -7,10 +7,12 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { finalize } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 interface User {
   displayName: string;
   email: string;
   phoneNumber: string;
+  photoURL: string;
   // Ajoutez d'autres propriétés de l'utilisateur si nécessaire
 }
 
@@ -20,9 +22,11 @@ interface User {
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+  photoURL!: string;
   userId?: string;
   userDoc?: AngularFirestoreDocument<User>;
   user!: Observable<User | undefined>;
+  connected: boolean = false;
 
   image:any;
   imagePath?: string;
@@ -35,14 +39,24 @@ export class Tab3Page {
     private afAuth: AngularFireAuth,
     private firestore: AngularFirestore,
     private route: ActivatedRoute,
-    private camera: Camera
+    private camera: Camera,
+    private router: Router
   ) {
     this.afAuth.authState.subscribe(user => {
       if (user) {
         const userDoc: AngularFirestoreDocument<User> = this.firestore.doc<User>(`users/${user.uid}`);
         this.user = userDoc.valueChanges();
+        
+        this.user.subscribe(userData => {
+          this.photoURL = userData?.photoURL || 'assets/profil.webp';
+          this.connected = !!user;
+        });
       }
     });
+  }
+
+  redirectToLogin() {
+    this.router.navigateByUrl('/connexion');
   }
 
   async addPhoto() {
@@ -119,6 +133,7 @@ export class Tab3Page {
         console.error('Erreur lors de la mise à jour des données :', error);
       });
   }
+
 
 
 }

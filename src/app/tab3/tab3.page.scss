@@ -4,10 +4,25 @@
     justify-content: center;
 }
 
+.font1 {
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.font2 {
+    font-size: small;
+    font-weight: 400
+}
+
 .border-blanc {
     border: 5px solid white;
     border-radius: 50%;
     width: fit-content;
+}
+
+.background-grey {
+    background-color: #f0f0f0; /* ou toute autre couleur de gris que vous préférez */
+    padding: 10px; /* ajoutez du padding si nécessaire */
 }
 
 .border-black {
@@ -48,4 +63,10 @@ img {
     bottom: 1px;
     right: 1px;
     border-radius: 50%;
+}
+
+.placeholder {
+    background-color: #cccccc; /* Gris clair */
+    width: 100px; /* Ajustez la taille selon vos besoins */
+    height: 100px; /* Ajustez la taille selon vos besoins */
 }

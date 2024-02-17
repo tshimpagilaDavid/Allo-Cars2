@@ -1,7 +1,7 @@
-
-ion-content {
-  --background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1)),
-  var("/assets/VX.JPG") no-repeat center center / cover;
+.background-image {
+  --background: url('../../assets/VX.JPG');
+  background-size: cover; /* ou background-size: contain; */
+  background-repeat: no-repeat;
 }
 
 .image-container {

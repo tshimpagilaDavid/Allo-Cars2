@@ -11,18 +11,47 @@
 <ion-content [fullscreen]="true">
   <div class="header"></div>
 
-  <div class="flex"> 
+  <div *ngIf="!connected">
+    <div class="flex"> 
+      <div class="border-black">
+        <div class="border-blanc">
+          <img [src]="image" class="background-grey"/>
+        </div>
+        <ion-button (click)="addPhoto()" color="dark">
+          <ion-icon name="camera-outline"></ion-icon>
+        </ion-button>
+      </div>  
+    </div>  
+    <!-- Ajoutez ici les éléments que vous souhaitez afficher lorsque l'utilisateur n'est pas connecté -->
+  </div>
+
+  <ion-card *ngIf="!connected">
+    <ion-card-header class="font1">
+      Bienvenue !
+    </ion-card-header>
+    <ion-card-content>
+      <p class="font2">
+        Inscris-toi ou connecte-toi pour bénéficier d'offres exclusives et rester informé(e) de nos nouveautés !
+      </p>
+      <ion-button expand="block" color="primary" (click)="redirectToLogin()">
+        {{ connected ? 'Connecte-toi !' : 'Inscris-toi !' }}
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="flex" *ngIf="connected"> 
     <div class="border-black">
-      <div class="border-blanc">
-        <img [src]="image"/>
+      <div class="border-blanc" *ngIf="photoURL">
+        <img [src]="photoURL" alt="Photo de profil" class="profile-picture"/>
+        <div *ngIf="!photoURL" class="placeholder"></div>
       </div>
-      <ion-button (click)="addPhoto()" color="dark">
+      <ion-button *ngIf="connected" (click)="addPhoto()" color="dark">
         <ion-icon name="camera-outline"></ion-icon>
       </ion-button>
     </div>  
   </div>
 
-  <ion-card>
+  <ion-card *ngIf="connected">
     <ion-card-content *ngIf="(user | async) as userData">
       <ion-list>
         <ion-item>
@@ -41,7 +70,7 @@
       </ion-list>
     </ion-card-content>
   </ion-card>
-  <ion-button (click)="uploadFirebase()" expand="block" shape="round" color="dark">
+  <ion-button *ngIf="connected" (click)="uploadFirebase()" expand="block" shape="round" color="dark">
     <ion-label>Enregistrer les changements</ion-label>
   </ion-button>
 </ion-content>
