@@ -77,20 +77,22 @@ swiper-slide {
 }
 
 .label {
-  font-size: 14px;
+  font-size: 13px;
   margin: -10px 0px 0px 0px;
-  font-weight: 720;
+  font-weight: 750;
 }
  
 .boot {
   font-size: 14px;
   margin: -10px 0px 0px 0px;
-  font-weight: 720;
-  color: black;
+  font-weight: 750;
+  width: 120px;
+  height: 30px;
 }
 
 .swiper-container-rounded {
-  border-radius: 20px; /* ajustez la valeur selon vos préférences */
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px; /* ajustez la valeur selon vos préférences */
   overflow: hidden; /* pour cacher les coins arrondis qui dépassent */
 }
 

@@ -15,9 +15,9 @@
     <div class="flex"> 
       <div class="border-black">
         <div class="border-blanc">
-          <img [src]="image" class="background-grey"/>
+          <img src="assets/profil.webp"/>
         </div>
-        <ion-button (click)="addPhoto()" color="dark">
+        <ion-button class="ion-button" color="dark">
           <ion-icon name="camera-outline"></ion-icon>
         </ion-button>
       </div>  
@@ -33,7 +33,8 @@
       <p class="font2">
         Inscris-toi ou connecte-toi pour bénéficier d'offres exclusives et rester informé(e) de nos nouveautés !
       </p>
-      <ion-button expand="block" color="primary" (click)="redirectToLogin()">
+      <br>
+      <ion-button shape="round" color="dark" expand="block" (click)="redirectToLogin()">
         {{ connected ? 'Connecte-toi !' : 'Inscris-toi !' }}
       </ion-button>
     </ion-card-content>

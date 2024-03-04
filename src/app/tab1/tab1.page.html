@@ -190,25 +190,25 @@
   <br>
 
   <swiper-container class="swiper-container-rounded" (slidechange)="swiperSlideChanged($event)" [loop]="true" [pagination]="true">
-    <swiper-slide>
+    <swiper-slide (click)="achat()">
       <img src="assets/hyundai_palisade_2020_4k-HD.jpg">  
       <ion-item color="dark" lines="none">
-        <ion-label class="label">Accéder à l'achat du véhicule:</ion-label>
-        <ion-button fill="outline" shape="round" class="boot" color="light" routerLink="/achat-de-vehicule">Acheter</ion-button>
+        <ion-label class="label">Accéder à l'achat d'un véhicule:</ion-label>
+        <ion-button shape="round" class="boot" color="light" routerLink="/tabs/location-et-vente">Acheter</ion-button>
       </ion-item>    
     </swiper-slide>
-    <swiper-slide>
+    <swiper-slide (click)="location()">
       <img src="assets/hyundai_palisade_2020_4k-HD.jpg">
       <ion-item color="dark" lines="none">
-        <ion-label class="label">Accéder à la location du véhicule:</ion-label>
-        <ion-button fill="outline" shape="round" class="boot" color="light" routerLink="/location">Location</ion-button>
+        <ion-label class="label">Accéder à la location d'un véhicule:</ion-label>
+        <ion-button shape="round" class="boot" color="light" routerLink="/tabs/location-et-vente">Location</ion-button>
       </ion-item>
     </swiper-slide>
-    <swiper-slide>
+    <swiper-slide  (click)="taxi()">
       <img src="assets/hyundai_palisade_2020_4k-HD.jpg">
       <ion-item color="dark" lines="none">
         <ion-label class="label">Allez commander votre Taxi:</ion-label>
-        <ion-button fill="outline" shape="round" class="boot" color="light" routerLink="/tabs/tab2">Taxi</ion-button>
+        <ion-button shape="round" class="boot" color="light" routerLink="/tabs/tab2">Taxi</ion-button>
       </ion-item>
     </swiper-slide>
   </swiper-container>

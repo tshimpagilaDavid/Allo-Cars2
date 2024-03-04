@@ -13,7 +13,7 @@ export class ScreenPage implements OnInit {
   ) { 
     setTimeout(()=>{
       this.router.navigate(['/connexion'])
-    },5500);
+    },2200);
   }
 
   ngOnInit() {

@@ -13,16 +13,15 @@ import { MenuController } from '@ionic/angular';
 export class AppComponent {
   connected?: boolean;
   constructor(
-    public router: Router,
-    public afAuth: AngularFireAuth,
+    private router: Router,
+    private afAuth: AngularFireAuth,
     private platform: Platform,
     private menu: MenuController
   ) {
     this.afAuth.authState.subscribe(auth => {
       if (!auth) {
         console.log('non connecté');
-        this.connected = false;  
-        this.router.navigateByUrl('/connexion');            
+        this.connected = false;              
       } else {
         console.log('connecté: ' + auth.uid);
         this.connected = true;
