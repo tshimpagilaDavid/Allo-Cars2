@@ -35,7 +35,16 @@ export class AppComponent {
     });
   }
   logout() {
-    this.afAuth.signOut();
+    if (this.connected) {
+      this.afAuth.signOut().then(() => {
+        // Rediriger vers la page de connexion une fois que l'utilisateur est déconnecté
+        this.router.navigateByUrl('/connexion');
+        this.menu.close();
+      }).catch(error => {
+        // Gérer les erreurs éventuelles ici
+        console.error('Erreur lors de la déconnexion :', error);
+      });
+    }
   }
   retour() {
     if (!this.connected) {

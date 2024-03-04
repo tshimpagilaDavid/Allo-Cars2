@@ -46,7 +46,7 @@
         <img [src]="photoURL" alt="Photo de profil" class="profile-picture"/>
         <div *ngIf="!photoURL" class="placeholder"></div>
       </div>
-      <ion-button *ngIf="connected" (click)="addPhoto()" color="dark">
+      <ion-button class="ion-button" *ngIf="connected" (click)="addPhoto()" color="dark">
         <ion-icon name="camera-outline"></ion-icon>
       </ion-button>
     </div>  
