@@ -98,6 +98,6 @@ swiper-slide {
 
 /* CSS pour limiter la largeur du conteneur */
 .swiper-container-rounded .swiper-wrapper {
-  max-width: 80%; /* ajustez la valeur selon vos préférences */
-  margin: auto; /* pour centrer le conteneur horizontalement */
+  max-width: 100%; /* ajustez la valeur selon vos préférences */ /* pour centrer le conteneur horizontalement */
+  height: 280px;
 }
