@@ -6,22 +6,128 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="background-image">
-  <div class="image-container">
-    <div class="top-half">
-      <img class="top-left-image" src="assets/hyundai_palisade_2020_4k-HD.jpg" alt="Image 1">
-      <div class="text-button2">
-        <p>procéder à l'achat de votre véhicule en toute sécurité</p>
-        <ion-button shape="round" color="dark" routerLink="/achat-de-vehicule">Achat</ion-button>
-      </div>
-    </div>
-    <div class="bottom-half">
-      <img class="footer-right-image" src="assets/drive.jpg" alt="Image 2">
-      <div class="text-button">
-        <p>obtener la location d'un véhicule en toute sécurité</p>
-        <ion-button shape="round" color="dark" routerLink="/location">Location</ion-button>
-      </div>
-    </div>
-  </div>
+<ion-content>
+
+  <!-- Contenu pour acheter un véhicule -->
+    <ion-card>
+      <!-- Partie supérieure pour les photos -->
+      <ion-card-content>
+        <div class="swiper-container" #slides>
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="assets/hyundai_palisade_2020_4k-HD.jpg">
+            </div>
+            <div class="swiper-slide">
+              <img src="assets/hyundai_palisade_2020_4k-HD.jpg">
+            </div>
+            <div class="swiper-slide">
+              <img src="assets/hyundai_palisade_2020_4k-HD.jpg">
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+      </ion-card-content>
+      <!-- Partie inférieure pour les informations -->
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6">
+              <h2>marque :</h2>
+              <ion-input class="font" type="text" [(ngModel)]="marque"></ion-input>
+              <p>modele :</p>
+              <ion-input type="text" [(ngModel)]="modele"></ion-input>
+            </ion-col>
+            <ion-col size="6">
+              <p class="ion-text-center">Prix :</p>
+              <ion-item> 
+                <ion-icon slot="start" size="large" src="assets/icon/dollar.svg"></ion-icon>
+                <ion-input type="text" [(ngModel)]="prix"></ion-input>
+              </ion-item>   
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6"> 
+              <p class="ion-text-center">Boîte :</p>
+              <ion-item>
+                <ion-icon slot="start" size="large" src="assets/icon/moteur.svg"></ion-icon>
+                <ion-input type="text" [(ngModel)]="boite"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6">
+              <p class="ion-text-center">Carburant :</p>
+              <ion-item>
+                <ion-icon slot="start" size="large" src="assets/icon/boîte.svg"></ion-icon>
+                <ion-input type="text" [(ngModel)]="carburant"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <p class="ion-text-center">kilométrage :</p>
+              <ion-item>
+                <ion-icon slot="start" size="large" src="assets/icon/kilométrage.svg"></ion-icon>
+                <ion-input type="text" [(ngModel)]="kilometrage"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6">
+              <p class="ion-text-center">année :</p>
+              <ion-item>
+                <ion-icon slot="start" size="large" name="calendar-outline"></ion-icon>
+                <ion-input type="text" [(ngModel)]="annee"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-button (click)="VoitureAchat()">Ajouter Voiture</ion-button>
+      </ion-card-content>
+    </ion-card>
+
+  <!-- Contenu pour louer un véhicule -->
+    <ion-card>
+      <!-- Partie supérieure pour les photos -->
+      <ion-card-content>
+        <div class="swiper-container" #slides>
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="assets/hyundai_palisade_2020_4k-HD.jpg">
+            </div>
+            <div class="swiper-slide">
+              <img src="assets/hyundai_palisade_2020_4k-HD.jpg">
+            </div>
+            <div class="swiper-slide">
+              <img src="assets/hyundai_palisade_2020_4k-HD.jpg">
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+      </ion-card-content>
+      <!-- Partie inférieure pour les informations -->
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6">
+              <h2>marque :</h2>
+              <ion-input class="font" type="text" [(ngModel)]="marque"></ion-input>
+              <p>modele :</p>
+              <ion-input type="text" [(ngModel)]="modele"></ion-input>
+            </ion-col>
+            <ion-col size="6">
+              <p class="ion-text-center">Prix :</p>
+              <ion-item> 
+                <ion-icon slot="start" size="large" src="assets/icon/dollar.svg"></ion-icon>
+                <ion-input type="text" [(ngModel)]="prix"></ion-input>
+              </ion-item>   
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-button (click)="VoitureLocation()">Ajouter Voiture</ion-button>
+      </ion-card-content>
+    </ion-card>
+
+
 </ion-content>
 

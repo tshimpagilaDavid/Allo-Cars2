@@ -1,94 +1,70 @@
-.image-container {
-  overflow: hidden !important;
-  position: relative;
-  height: 100%;
+.hidden {
+  display: none;
+}
+
+.label {
+  font-size: 14px;
+  margin: 0px 0px 0px 0px;
+  font-weight: 720;
+  color: black;
+}
+
+.flex {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
 }
 
-.top-half {
-  overflow: hidden !important;
-  position: relative;
-  height: 50vh;
-  box-sizing: border-box;
+.boot {
+  font-size: 13px;
+  font-weight: 720;
 }
 
-.bottom-half {
-  overflow: hidden !important;
-  position: relative;
-  height: 50vh;
-  box-sizing: border-box;
+/* Style pour le conteneur du swiper */
+.swiper-container {
+  width: 100%; /* Pour remplir la largeur de son conteneur parent */
+  height: 100%; /* Pour remplir la hauteur de son conteneur parent */
 }
 
-.top-left-image {
-  position: absolute;
-  right: 0;
-  border: 2px solid black;
+
+/* Style pour chaque slide dans le swiper */
+.swiper-slide {
+  width: 100%; /* Pour remplir la largeur du conteneur swiper */
+  height: 100%; /* Pour remplir la hauteur du conteneur swiper */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Pour cacher tout ce qui dépasse des slides */
+
 }
 
-.footer-right-image {
-  position: absolute;
-  left: 0;
-  border: 2px solid black;
+/* Style pour les images dans les slides */
+.swiper-slide img {
+  width: 100%; /* Pour remplir la largeur de chaque slide */
+  height: 100%; /* Pour remplir la hauteur de chaque slide */
+  object-fit: cover; /* Pour ajuster la taille de l'image tout en conservant son ratio d'aspect */
+
 }
 
-.text-button {
-  position: absolute;
-  color: white;
-  width: 35%;
-  height: 50%;
-  left: 0;
-  top: 25%;
-  text-align: center;
-  border-radius: 25%;
-  font-weight: 700;
-  -webkit-animation: scale-up-center 2s ;
-  animation: scale-up-center 2s ;
-}
-.text-button p {
-  margin: 5px;
-}
-.text-button2 p {
-  margin: 5px;
-}
-.text-button2 {
-  position: absolute;
-  color: white;
-  width: 35%;
-  height: 50%;
-  right: 0;
-  top: 25%;
-  text-align: center;
-  border-radius: 25%;
-  font-weight: 700;
-  -webkit-animation: scale-up-center 2s ;
-  animation: scale-up-center 2s ;
+.swiper-pagination-bullet {
+  background-color: white; /* Couleur de fond des boutons de pagination */
+  width: 8px;
+  height: 8px;
+  margin: 0 5px;
+  border-radius: 50%;
 }
 
-@-webkit-keyframes scale-up-center {
-  0% {
-    -webkit-transform: scale(0.5);
-            transform: scale(0.5);
-  }
-  100% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-}
-@keyframes scale-up-center {
-  0% {
-    -webkit-transform: scale(0.5);
-            transform: scale(0.5);
-  }
-  100% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
+.swiper-button-next,
+.swiper-button-prev {
+  color: white; /* Couleur des flèches de navigation */
 }
 
-@media screen and (max-width: 600px) {
-  .top-left-image,.footer-right-image {
-    width: 100%;
-    height: 100%;
-  }
+/* Optionnel : Ajouter des styles hover pour les flèches de navigation */
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  color: white; /* Couleur des flèches de navigation au survol */
+}
+
+.font {
+  font-size: 24px;
+  font-weight: 900;
 }
