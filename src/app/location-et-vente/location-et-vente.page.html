@@ -8,8 +8,18 @@
 
 <ion-content>
 
-  <!-- Contenu pour acheter un véhicule -->
-    <ion-card>
+  <ion-segment (ionChange)="segmentChanged($event)" value="Acheter un véhicule">
+    <ion-segment-button value="Acheter un véhicule">
+      <ion-label color="dark">Acheter un véhicule</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Louer un véhicule">
+      <ion-label color="dark">Louer un véhicule</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  
+  <div  *ngIf="selectedSegment == 'Acheter un véhicule'">
+    <!-- Contenu pour acheter un véhicule -->
+    <ion-card  [ngClass]="{'hidden': userEmail !== 'davidtshipangila@gmail.com'}">
       <!-- Partie supérieure pour les photos -->
       <ion-card-content>
         <div class="swiper-container" #slides>
@@ -41,51 +51,49 @@
             </ion-col>
             <ion-col size="6">
               <p class="ion-text-center">Prix :</p>
-              <ion-item> 
+              <ion-item lines="none"> 
                 <ion-icon slot="start" size="large" src="assets/icon/dollar.svg"></ion-icon>
                 <ion-input type="text" [(ngModel)]="prix"></ion-input>
               </ion-item>   
             </ion-col>
-          </ion-row>
-          <ion-row>
             <ion-col size="6"> 
               <p class="ion-text-center">Boîte :</p>
-              <ion-item>
+              <ion-item lines="none">
                 <ion-icon slot="start" size="large" src="assets/icon/moteur.svg"></ion-icon>
                 <ion-input type="text" [(ngModel)]="boite"></ion-input>
               </ion-item>
             </ion-col>
             <ion-col size="6">
               <p class="ion-text-center">Carburant :</p>
-              <ion-item>
+              <ion-item lines="none">
                 <ion-icon slot="start" size="large" src="assets/icon/boîte.svg"></ion-icon>
                 <ion-input type="text" [(ngModel)]="carburant"></ion-input>
               </ion-item>
             </ion-col>
-          </ion-row>
-          <ion-row>
             <ion-col size="6">
               <p class="ion-text-center">kilométrage :</p>
-              <ion-item>
+              <ion-item lines="none">
                 <ion-icon slot="start" size="large" src="assets/icon/kilométrage.svg"></ion-icon>
-                <ion-input type="text" [(ngModel)]="kilometrage"></ion-input>
+                <ion-input type="text"  [(ngModel)]="kilometrage"></ion-input>
               </ion-item>
             </ion-col>
             <ion-col size="6">
               <p class="ion-text-center">année :</p>
-              <ion-item>
-                <ion-icon slot="start" size="large" name="calendar-outline"></ion-icon>
-                <ion-input type="text" [(ngModel)]="annee"></ion-input>
+              <ion-item lines="none">
+                <ion-input type="text" [(ngModel)]="annee">
+                  <ion-icon slot="start" size="large" name="calendar-outline"></ion-icon>
+                </ion-input>
               </ion-item>
             </ion-col>
           </ion-row>
         </ion-grid>
-        <ion-button (click)="VoitureAchat()">Ajouter Voiture</ion-button>
+        <ion-button shape="round" expand="block" color="dark" (click)="VoitureAchat()">Ajouter Voiture</ion-button>
       </ion-card-content>
     </ion-card>
+  </div>
 
-  <!-- Contenu pour louer un véhicule -->
-    <ion-card>
+  <div  *ngIf="selectedSegment == 'Louer un véhicule'">
+    <ion-card  [ngClass]="{'hidden': userEmail !== 'davidtshipangila@gmail.com'}">
       <!-- Partie supérieure pour les photos -->
       <ion-card-content>
         <div class="swiper-container" #slides>
@@ -111,23 +119,37 @@
           <ion-row>
             <ion-col size="6">
               <h2>marque :</h2>
-              <ion-input class="font" type="text" [(ngModel)]="marque"></ion-input>
+              <ion-input class="font" type="text" [(ngModel)]="marqueLoc"></ion-input>
               <p>modele :</p>
-              <ion-input type="text" [(ngModel)]="modele"></ion-input>
+              <ion-input type="text" [(ngModel)]="modeleLoc"></ion-input>
             </ion-col>
             <ion-col size="6">
               <p class="ion-text-center">Prix :</p>
-              <ion-item> 
+              <ion-item lines="none"> 
                 <ion-icon slot="start" size="large" src="assets/icon/dollar.svg"></ion-icon>
-                <ion-input type="text" [(ngModel)]="prix"></ion-input>
+                <ion-input type="text" [(ngModel)]="prixjour"></ion-input>
               </ion-item>   
+            </ion-col>
+            <ion-col size="6"> 
+              <p class="ion-text-center">Boîte :</p>
+              <ion-item lines="none">
+                <ion-icon slot="start" size="large" src="assets/icon/moteur.svg"></ion-icon>
+                <ion-input type="text" [(ngModel)]="boiteLoc"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6">
+              <p class="ion-text-center">Carburant :</p>
+              <ion-item lines="none">
+                <ion-icon slot="start" size="large" src="assets/icon/boîte.svg"></ion-icon>
+                <ion-input type="text" [(ngModel)]="carburantLoc"></ion-input>
+              </ion-item>
             </ion-col>
           </ion-row>
         </ion-grid>
-        <ion-button (click)="VoitureLocation()">Ajouter Voiture</ion-button>
+        <ion-button shape="round" expand="block" color="dark" (click)="VoitureLocation()">Ajouter Voiture</ion-button>
       </ion-card-content>
     </ion-card>
-
+  </div>
 
 </ion-content>
 

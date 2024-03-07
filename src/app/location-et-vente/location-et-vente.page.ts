@@ -1,6 +1,7 @@
-import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { register } from 'swiper/element/bundle';
 register();
 import Swiper from 'swiper';
@@ -11,10 +12,12 @@ import Swiper from 'swiper';
   styleUrls: ['./location-et-vente.page.scss'],
 })
 export class LocationEtVentePage implements OnInit {
+  showContent: boolean = true;
   images: string[] = [];
+  mySwiper!: Swiper;
   selectedImages: string[] = [];
-  @ViewChild('slides', { static: true }) slides: any;
   public selectedSegment: string = 'Acheter un véhicule';
+  @ViewChild('slides', { static: true }) slides: any;
   userEmail: string | null = null;
   marque!: string;
   modele!: string;
@@ -23,8 +26,36 @@ export class LocationEtVentePage implements OnInit {
   carburant!: string;
   kilometrage!: string;
   annee!: string;
+  marqueLoc!: string;
+  modeleLoc!: string;
+  prixjour!: string;
+  boiteLoc!: string;
+  carburantLoc!: string;
 
-  constructor(private firestore: AngularFirestore) {}
+  constructor(private firestore: AngularFirestore,private afAuth: AngularFireAuth) {
+    this.afAuth.authState.subscribe(user => {
+      // Mettre à jour l'adresse e-mail de l'utilisateur
+      this.userEmail = user ? user.email : null;
+    });
+  }
+
+  VoitureLocation(): void {
+    const VoitureLocation = {
+      marqueLoc: this.marqueLoc,
+      modeleLoc: this.modeleLoc,
+      prixjour: this.prixjour,
+      boiteLoc: this.boiteLoc,
+      carburantLoc: this.carburantLoc
+    }
+    this.firestore.collection('carsloc').add(VoitureLocation)
+    .then(() => {
+      console.log('Voiture à acheter ajoutée avec succès à Firestore');
+      this.reinitialiserChamps();
+    })
+    .catch(error => {
+      console.error('Erreur lors de l\'ajout de la voiture à acheter : ', error);
+    });
+  }
 
   VoitureAchat(): void {
     const voitureAchat = {
@@ -37,24 +68,7 @@ export class LocationEtVentePage implements OnInit {
       annee: this.annee
     };
 
-    this.firestore.collection('voitures-achat').add(voitureAchat)
-      .then(() => {
-        console.log('Voiture à acheter ajoutée avec succès à Firestore');
-        this.reinitialiserChamps();
-      })
-      .catch(error => {
-        console.error('Erreur lors de l\'ajout de la voiture à acheter : ', error);
-      });
-  }
-
-  VoitureLocation(): void {
-    const VoitureLocation = {
-      marque: this.marque,
-      modele: this.modele,
-      prix: this.prix
-    };
-
-    this.firestore.collection('voitures_achat').add(VoitureLocation)
+    this.firestore.collection('cars').add(voitureAchat)
       .then(() => {
         console.log('Voiture à acheter ajoutée avec succès à Firestore');
         this.reinitialiserChamps();
@@ -72,16 +86,28 @@ export class LocationEtVentePage implements OnInit {
     this.carburant = '';
     this.kilometrage = '';
     this.annee = '';
+    this.marqueLoc = '';
+    this.modeleLoc = '';
+    this.boiteLoc = '';
+    this.carburantLoc = '';
+    this.prixjour = '';
   }
 
   swiperSlideChanged(e: any) {
     console.log('changed: ', e);
   }
-
   segmentChanged(event: any) {
-    this.selectedSegment = event.target.value,
-    console.log(event.target.value)
+    // Détruire le Swiper existant avant de changer de segment
+    if (this.mySwiper) {
+      this.mySwiper.destroy();
+    }
+    
+    // Réinitialiser le Swiper après avoir changé de segment
+    this.initSwiper();
+    this.selectedSegment = event.detail.value;
+    console.log('Segment changed to', this.selectedSegment);
   }
+
   selectImage(imageIndex: number) {
     const selectedImage = this.images[imageIndex]; // Accédez à la variable images à partir de l'instance de la classe avec 'this.'
     this.selectedImages.push(selectedImage);
@@ -127,7 +153,9 @@ export class LocationEtVentePage implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ngAfterViewInit() {
     this.initSwiper();
   }
 
