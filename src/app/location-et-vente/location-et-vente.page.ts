@@ -13,6 +13,7 @@ import Swiper from 'swiper';
 })
 export class LocationEtVentePage implements OnInit {
   showContent: boolean = true;
+  showAchatContent: boolean = true; 
   images: string[] = [];
   mySwiper!: Swiper;
   selectedImages: string[] = [];
@@ -101,10 +102,25 @@ export class LocationEtVentePage implements OnInit {
     if (this.mySwiper) {
       this.mySwiper.destroy();
     }
-    
-    // Réinitialiser le Swiper après avoir changé de segment
-    this.initSwiper();
+
+  // Réinitialiser le Swiper après avoir changé de segment
+    setTimeout(() => {
+      this.initSwiper();
+    });
+
     this.selectedSegment = event.detail.value;
+    
+    // Contrôler l'affichage des parties en fonction du segment sélectionné
+    if (this.selectedSegment === 'Acheter un véhicule') {
+        this.showContent = true;
+        this.showAchatContent = true;
+    } else if (this.selectedSegment === 'Louer un véhicule') {
+        this.showContent = true;
+        this.showAchatContent = false;
+    } else {
+        this.showContent = false;
+    }
+
     console.log('Segment changed to', this.selectedSegment);
   }
 

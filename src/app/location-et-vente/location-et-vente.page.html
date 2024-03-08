@@ -8,6 +8,12 @@
 
 <ion-content>
 
+  <div class="header">
+    <h1>Bienvenue</h1>
+    <p>
+      le service de location et d'achat de véhicules de l'application AlloCar's, votre partenaire de confiance pour trouver le véhicule de vos rêves parmi une sélection de qualité provenant de concessionnaires agréés.</p>
+  </div>
+  <br>
   <ion-segment (ionChange)="segmentChanged($event)" value="Acheter un véhicule">
     <ion-segment-button value="Acheter un véhicule">
       <ion-label color="dark">Acheter un véhicule</ion-label>
@@ -17,7 +23,7 @@
     </ion-segment-button>
   </ion-segment>
   
-  <div  *ngIf="selectedSegment == 'Acheter un véhicule'">
+  <div  *ngIf="showContent && showAchatContent">
     <!-- Contenu pour acheter un véhicule -->
     <ion-card  [ngClass]="{'hidden': userEmail !== 'davidtshipangila@gmail.com'}">
       <!-- Partie supérieure pour les photos -->
@@ -92,7 +98,7 @@
     </ion-card>
   </div>
 
-  <div  *ngIf="selectedSegment == 'Louer un véhicule'">
+  <div *ngIf="showContent && !showAchatContent">
     <ion-card  [ngClass]="{'hidden': userEmail !== 'davidtshipangila@gmail.com'}">
       <!-- Partie supérieure pour les photos -->
       <ion-card-content>
