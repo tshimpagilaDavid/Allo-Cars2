@@ -5,6 +5,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { register } from 'swiper/element/bundle';
 register();
 import Swiper from 'swiper';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-location-et-vente',
@@ -12,6 +13,7 @@ import Swiper from 'swiper';
   styleUrls: ['./location-et-vente.page.scss'],
 })
 export class LocationEtVentePage implements OnInit {
+  segmentButtonColor: string = 'Acheter un véhicule';
   showContent: boolean = true;
   showAchatContent: boolean = true; 
   images: string[] = [];
