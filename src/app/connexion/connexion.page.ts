@@ -5,6 +5,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 import * as firebase from 'firebase/app'; import 'firebase/auth';
+declare var FB: any;
+
 
 @Component({
   selector: 'app-connexion',
@@ -66,21 +68,11 @@ export class ConnexionPage implements OnInit {
 
   async loginWithFacebook() {
     try {
-      const accessToken = 'votre_jetoon_dacces_ici';
-      const response: FacebookLoginResponse = await this.fb.login(['public_profile', 'email']);
+      const response = await this.afAuth.signInWithPopup(new firebase.default.auth.FacebookAuthProvider());
 
-      if (response.authResponse) {
-        const credential = firebase.default.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
-        const result = await this.afAuth.signInWithCredential(credential);
-        const user = result.user;
-        this.firestore.doc('users/' + user!.uid).set({
-          author: user!.uid,
-          photoURL: user!.photoURL,
-          displayName: user!.displayName,
-          email: user!.email,
-          date: new Date().toISOString()
-        });
+      if (response.user) {
         console.log('Connecté avec Facebook !');
+        this.handleSuccessfulLogin(response.user);
       } else {
         console.log('Échec de la connexion Facebook.');
       }
@@ -89,40 +81,74 @@ export class ConnexionPage implements OnInit {
     }
   }
 
+  async handleSuccessfulLogin(user: firebase.default.User | null) {
+    try {
+      if (!user) {
+        throw new Error('Utilisateur non trouvé');
+      }
+
+      // Enregistrer les informations de l'utilisateur dans la base de données Firestore
+      await this.saveUserDataToFirestore(user);
+
+      console.log('Informations de l\'utilisateur enregistrées avec succès dans Firestore.');
+    } catch (error) {
+      console.error('Erreur lors de l\'enregistrement des informations de l\'utilisateur dans Firestore :', error);
+    }
+  }
+
+  async saveUserDataToFirestore(user: firebase.default.User) {
+    try {
+      // Enregistrer les informations de l'utilisateur dans Firestore
+      await this.firestore.doc(`users/${user.uid}`).set({
+        author: user.uid,
+        photoURL: user.photoURL,
+        displayName: user.displayName,
+        email: user.email,
+        date: new Date().toISOString()
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+
+
   async loginWithFacebook2() {
     try {
-      const response: FacebookLoginResponse = await this.fb.login(['public_profile', 'email']);
-  
-      if (response && response.authResponse) {
-        const credential = firebase.default.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
-        const fbUser = await this.afAuth.signInWithCredential(credential);
-  
-        if (fbUser && fbUser.user) {
-          // Vérifier si l'utilisateur existe dans Firestore
-          const userDoc = await this.firestore.collection('users').doc(fbUser.user.uid).get().toPromise();
-  
-          if (userDoc!.exists) {
-            console.log('Connecté avec Facebook !');
-            // L'utilisateur est enregistré dans Firestore, vous pouvez effectuer d'autres actions ici
-          } else {
-            // L'utilisateur n'existe pas dans Firestore, déconnectez-le et affichez un message d'erreur
-            console.log('Cet utilisateur n\'est pas enregistré.');
-            await this.afAuth.signOut();
-            // Afficher un message à l'utilisateur pour l'inviter à s'inscrire
-            // Par exemple, vous pouvez utiliser un service d'alerte ou un composant d'alerte Ionic
-            this.showErrorMessage('Veuillez vous inscrire pour accéder à la connexion.');
-          }
-        } else {
-          console.log('Erreur lors de l-authentification Facebook : Utilisateur non trouvé');
-        }
+      // Demander à l'utilisateur de se connecter avec Facebook
+      const response = await this.afAuth.signInWithPopup(new firebase.default.auth.FacebookAuthProvider());
+
+      // Vérifier si la connexion a réussi et si un utilisateur est renvoyé
+      if (response.user) {
+        // Utilisateur connecté avec succès, continuer avec les actions nécessaires
+        console.log('Connecté avec Facebook !');
+        await this.handleSuccessfulLogin2(response.user);
       } else {
-        console.log('Authentification Facebook échouée.');
+        // La connexion a échoué ou aucun utilisateur n'a été renvoyé
+        console.log('Échec de la connexion Facebook.');
       }
     } catch (error) {
       console.error('Erreur lors de la connexion Facebook :', error);
     }
   }
 
+  async handleSuccessfulLogin2(user: firebase.default.User) {
+    try {
+      // Vérifier si l'utilisateur existe déjà dans Firestore
+      const userDoc = await this.firestore.collection('users').doc(user.uid).get().toPromise();
+
+      if (userDoc?.exists) {
+        // L'utilisateur existe déjà dans Firestore, effectuer d'autres actions ici
+        console.log('Utilisateur déjà enregistré dans Firestore.');
+      } else {
+        // L'utilisateur n'existe pas dans Firestore, enregistrer les informations dans la base de données
+        await this.saveUserDataToFirestore(user);
+        console.log('Informations de l\'utilisateur enregistrées avec succès dans Firestore.');
+      }
+    } catch (error) {
+      console.error('Erreur lors de la gestion de la connexion réussie :', error);
+    }
+  }
   async signInWithGoogle() {
     try {
       const provider = new firebase.default.auth.GoogleAuthProvider();

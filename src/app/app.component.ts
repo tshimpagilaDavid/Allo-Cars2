@@ -38,7 +38,7 @@ export class AppComponent {
     if (this.connected) {
       this.afAuth.signOut().then(() => {
         // Rediriger vers la page de connexion une fois que l'utilisateur est déconnecté
-        this.router.navigateByUrl('/connexion');
+        this.router.navigateByUrl('connexion');
         this.menu.close();
       }).catch(error => {
         // Gérer les erreurs éventuelles ici
@@ -46,7 +46,9 @@ export class AppComponent {
       });
     }
   }
-  retour() {
+  closeMenu() {
+    this.menu.close(); // Ferme le menu
+  }  retour() {
     if (!this.connected) {
       this.menu.close();
       this.router.navigateByUrl('connexion');

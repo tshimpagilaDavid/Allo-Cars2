@@ -14,6 +14,7 @@ ion-content {
   top: 0;
   left: 0;
   margin-bottom: -5px;
+  margin-top: -20px;
   object-fit: cover;
   display: block;
   border-bottom-left-radius: 20px; /* Arrondi le coin inférieur gauche */
@@ -47,7 +48,7 @@ swiper-slide {
 }
 
 .box-title {
-  margin: 10px 0px 5px 5px;
+  margin: 7px 2px 2px 5px;
   font-weight: 720;
   font-size: 20px;
 }
@@ -70,7 +71,7 @@ swiper-slide {
 }
 
 .model p {
-  font-size: 12px;
+  font-size: 13px;
   text-align: center;
   margin: 2px 0px 0px 0px;
   font-weight: 800;

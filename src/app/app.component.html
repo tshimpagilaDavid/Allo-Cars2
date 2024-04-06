@@ -2,7 +2,12 @@
   <ion-menu color="dark" side="start" menuId="main-menu" contentId="main">
     <ion-header>
       <ion-toolbar color="dark">
-        <ion-title>Menu</ion-title>
+        <ion-buttons slot="start">
+          <ion-button (click)="closeMenu()">
+            <ion-icon slot="icon-only" name="close"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-title class="ion-text-center">Menu</ion-title>
       </ion-toolbar>
     </ion-header>
     
