@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Observable } from 'rxjs';
 import { LoadingController, AlertController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -22,14 +21,14 @@ interface User {
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
-  photoURL!: string;
   userId?: string;
   userDoc?: AngularFirestoreDocument<User>;
   user!: Observable<User | undefined>;
   connected: boolean = false;
-
-  image:any;
-  imagePath?: string;
+  photoURL: string | ArrayBuffer | null = null;
+  image: string = 'assets/images.png';
+  selectedFile: any;
+  imageClass: string = 'image';
   upload: any;
 
   constructor(
@@ -39,7 +38,6 @@ export class Tab3Page {
     private afAuth: AngularFireAuth,
     private firestore: AngularFirestore,
     private route: ActivatedRoute,
-    private camera: Camera,
     private router: Router
   ) {
     this.afAuth.authState.subscribe(user => {
@@ -59,23 +57,26 @@ export class Tab3Page {
     this.router.navigateByUrl('/connexion');
   }
 
-  async addPhoto() {
-    const libraryImage = await this.openLibrary();
-    this.image = 'data:image/jpg;base64,' + libraryImage;
+  openGallery() {
+    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+    fileInput.click();
   }
-
-  async openLibrary() {
-    const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      targetWidth: 1000,
-      targetHeight: 1000,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      correctOrientation: true
-    };
-    return await this.camera.getPicture(options);
+  
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0]; // Assignez la valeur de selectedFile à this.selectedFile
+    const selectedFile = this.selectedFile;
+    
+    // Vous pouvez maintenant traiter le fichier sélectionné comme vous le souhaitez
+    // Par exemple, vous pouvez afficher l'image dans votre application ou l'enregistrer sur le serveur.
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.photoURL = reader.result;
+        this.imageClass = 'image fit-image';
+      };
+      reader.readAsDataURL(selectedFile);
+    }
+    console.log(selectedFile);
   }
 
   async uploadFirebase() {
@@ -83,8 +84,8 @@ export class Tab3Page {
       duration: 2000
     });
     await loading.present();
-    this.imagePath = 'users/' + new Date().getTime() + '.jpg';
-    this.upload = this.afSG.ref(this.imagePath).putString(this.image, 'data_url');
+    this.selectedFile = 'users/' + new Date().getTime() + '.jpg';
+    this.upload = this.afSG.ref(this.image).putString(this.image, 'data_url');
     this.upload.then(async () => {
       await loading.onDidDismiss();
       const alert = await this.alertController.create({

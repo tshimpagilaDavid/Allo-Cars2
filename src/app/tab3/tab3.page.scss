@@ -32,21 +32,26 @@
     width: fit-content;
 }
 
-.img-box {
-    width: 50px;
+.image-box {
+    width: 150px;
     border-radius: 50%;
     overflow: hidden;
     display: flex;
     color: black;
 }
-
-img {
-    height: 150px;  
+  
+.fit-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover; /* Ajuste l'image pour remplir entièrement son conteneur sans déformation */
+}
+  
+.image img {
+    height: 150px;
     width: 150px;
     border-radius: 50%;
     overflow: hidden;
     display: flex;
-    justify-content: center;
 }
 
 .header {
