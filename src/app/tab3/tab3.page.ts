@@ -26,7 +26,7 @@ export class Tab3Page {
   user!: Observable<User | undefined>;
   connected: boolean = false;
   photoURL: string | ArrayBuffer | null = null;
-  image: string = 'assets/images.png';
+  image: string = 'assets/profil.webp';
   selectedFile: any;
   imageClass: string = 'image';
   upload: any;

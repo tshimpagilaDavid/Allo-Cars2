@@ -15,9 +15,12 @@
     <div class="flex"> 
       <div class="border-black">
         <div class="border-blanc">
-          <img src="assets/profil.webp"/>
+          <div class="image; image-box">
+            <img [src]="photoURL || image" [class]="imageClass + ' fit-image'"/>
+          </div>
         </div>
-        <ion-button class="ion-button" color="dark">
+        <input type="file" accept="image/*" id="fileInput" style="display: none;" (change)="onFileSelected($event)">
+        <ion-button class="ion-button" color="dark" (click)="openGallery()">
           <ion-icon name="camera-outline"></ion-icon>
         </ion-button>
       </div>  
@@ -43,8 +46,9 @@
   <div class="flex" *ngIf="connected"> 
     <div class="border-black">
       <div class="border-blanc" *ngIf="photoURL">
-        <img [src]="photoURL || image" *ngIf="photoURL" [class]="imageClass + ' fit-image'"/>
-        <div *ngIf="!photoURL" class="placeholder"></div>
+        <div *ngIf="!photoURL" class="placeholder" class="image; image-box">
+          <img [src]="photoURL || image" *ngIf="photoURL" [class]="imageClass + ' fit-image'"/>
+        </div>
       </div>
       <input type="file" accept="image/*" id="fileInput" style="display: none;" (change)="onFileSelected($event)">
       <ion-button class="ion-button" *ngIf="connected" color="dark" (click)="openGallery()">
