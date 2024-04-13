@@ -9,6 +9,16 @@ ion-content {
     border-radius: 9px;
     font-size: 0.9em !important;
 }
+
+.carre {
+    width: 20rem;
+    height: 18.5rem;
+    position: relative;
+    top: 25%;
+    left:48%;
+    transform: translate(-50%, -40%);
+}
+
 .otpinput {
     letter-spacing: 30px;
     -webkit-padding-end: 0;
@@ -151,13 +161,19 @@ ion-content {
 }
 
 .police {
-  font-size: 23px;
-  color:  rgb(175, 172, 172);
+    position: absolute;
+    left:48%;
+    font-size: 23px;
+    color:  rgb(175, 172, 172);
+    transform: translate(-50%, -90%);
 }
   
 .police2 {
-  font-size: 14px;
-  color:  rgb(175, 172, 172);
+    position: absolute;
+    left:48%;
+    font-size: 15px;
+    color:  rgb(175, 172, 172);
+    transform: translate(-50%, -0%);
 }
 
 .logo ion-icon {

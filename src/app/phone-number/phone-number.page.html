@@ -15,15 +15,15 @@
     <ion-icon name="car"></ion-icon>
   </div>
 
-  <div class="ion-text-center"> 
-    <ion-text class="police">AlloCars</ion-text>
+  <div class="police"> 
+    <ion-text>AlloCars</ion-text>
   </div>
   
   <div class="police2">
-    <p class="ion-text-center">Vous conduit vers le futur</p>
+    <p>Vous conduit vers le futur</p>
   </div>
   
-  <ion-card shape="round">  
+  <ion-card class="carre" shape="round">  
 
     <ion-item lines="none">
       <ion-label color="black">Nom:</ion-label>
@@ -60,15 +60,14 @@
       <ion-row>
         <ion-item lines="none">
           <ion-col size="8">
-            <ion-label class="label">Entrer le Code de vérification:</ion-label>
+            <ion-label class="label">Entrez le Code d'inscription:</ion-label>
           </ion-col>
           <ion-col size="4">
-            <ion-input type="test" color="black" clearInput class="input ion-padding-horizontal" clear-input="true" [(ngModel)]="verificationCode">Notez Ici!</ion-input>
+            <ion-input placeholder="Notez ici" type="test" color="black" clearInput class="input ion-padding-horizontal" clear-input="true" [(ngModel)]="verificationCode"></ion-input>
           </ion-col> 
         </ion-item>
         <ion-button expand="full" shape="round" color="success" (click)="verifyCode()">Vérifier le code d'inscription</ion-button>
       </ion-row>
     </ion-grid>
-    <br>
   </ion-card>
 </ion-content>
