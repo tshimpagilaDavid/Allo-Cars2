@@ -19,7 +19,7 @@
             <img [src]="photoURL || image" [class]="imageClass + ' fit-image'"/>
           </div>
         </div>
-        <input type="file" accept="image/*" id="fileInput" style="display: none;" (change)="onFileSelected($event)">
+        <input type="file" accept="image/*" id="fileInput" style="display: none;">
         <ion-button class="ion-button" color="dark" (click)="openGallery()">
           <ion-icon name="camera-outline"></ion-icon>
         </ion-button>

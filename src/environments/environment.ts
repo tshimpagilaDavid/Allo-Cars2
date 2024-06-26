@@ -16,8 +16,6 @@ export const environment = {
 
   },
   CountryJson: [
-    { name: 'Algeria', dial_code: '+213', code: 'DZ' },
-    { name: 'Angola', dial_code: '+244', code: 'AO' },
     { name: 'Gabon', dial_code: '+241', code:'GA' },
     { name: 'Cameroun', dial_code: '+237', code:'CM' },
     { name: 'République Démocratique du Congo', dial_code: '+243', code: 'CD'}

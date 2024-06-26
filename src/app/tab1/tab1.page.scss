@@ -8,28 +8,58 @@ ion-content {
   justify-content: space-between;
 }
 
-.img-intro {
-  height: auto;
+.image-container {
+  position: relative;
   width: 100%;
-  top: 0;
-  left: 0;
-  margin-bottom: -5px;
-  margin-top: 0px;
-  object-fit: cover;
-  display: block;
-  border-bottom-left-radius: 20px; /* Arrondi le coin inférieur gauche */
-  border-bottom-right-radius: 20px; /* Arrondi le coin inférieur droit */
-  overflow: hidden; /* Masque le débordement du dégradé */
+  height: 50vw; /* Ajustez cette valeur pour contrôler la hauteur de l'image */
 }
 
-.img-intro::after {
-  content: '';
+.img-intro {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-bottom-left-radius: 5%;
+  border-bottom-right-radius: 5%;
+  display: block;
+}
+
+.overlay {
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 0;
   width: 100%;
-  height: 20px; /* Hauteur de l'effet arrondi */
-  background: linear-gradient(to bottom, transparent, white); /* Dégradé transparent à blanc */
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: rgba(0, 0, 0, 0.3); /* Semi-transparent overlay */
+}
+
+.overlay-content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2%;
+  position: relative;
+}
+
+.overlay-content h1 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0;
+  flex-grow: 1;
+  text-align: center;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.overlay-content ion-buttons {
+  position: absolute;
+  top: 2%;
+  left: 1%;
 }
 
 swiper-container {
