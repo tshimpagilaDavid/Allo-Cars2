@@ -51,7 +51,7 @@ ion-content {
   flex-grow: 1;
   text-align: center;
   position: absolute;
-  top: 35%;
+  top: 75%;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -62,19 +62,46 @@ ion-content {
   left: 1%;
 }
 
-swiper-container {
-  width: 100%;
-  height: auto;
-  top: 0;
-  left: 0;
-  margin-bottom: -5px;
-  object-fit: cover;
-  display: block;
+.swiper-slide {
+  display: flex;
+  justify-content: center;
 }
 
-swiper-slide {
+.swiper-container-rounded {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px; /* Ajustez la valeur selon vos préférences */
+  overflow: hidden; /* Pour cacher les coins arrondis qui dépassent */
+}
+
+.swiper-container-rounded .swiper-wrapper {
+  max-width: 100%; /* Ajustez la valeur selon vos préférences */
+  height: 280px; /* Fixe la hauteur pour garantir une taille uniforme */
+}
+
+ion-card {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 90%; /* Ajustez la largeur selon vos besoins */
+  height: 100%;
+  border-radius: 20px; /* Assurez-vous que les coins sont arrondis */
+  overflow: hidden;
+}
+
+.swiper-img {
+  width: 100%;
+  height: 18rem;
+  object-fit: cover;
+}
+
+.item-overlay {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Ajoute une semi-transparence pour le texte */
+  color: white;
+}
+
+.item-overlay .label {
+  margin-right: -50px;
 }
 
 .box-title {
@@ -109,26 +136,15 @@ swiper-slide {
 
 .label {
   font-size: 13px;
-  margin: -10px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
   font-weight: 750;
 }
  
 .boot {
   font-size: 14px;
-  margin: -10px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
   font-weight: 750;
-  width: 120px;
+  width: 100px;
   height: 30px;
 }
 
-.swiper-container-rounded {
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px; /* ajustez la valeur selon vos préférences */
-  overflow: hidden; /* pour cacher les coins arrondis qui dépassent */
-}
-
-/* CSS pour limiter la largeur du conteneur */
-.swiper-container-rounded .swiper-wrapper {
-  max-width: 100%; /* ajustez la valeur selon vos préférences */ /* pour centrer le conteneur horizontalement */
-  height: 280px;
-}

@@ -179,27 +179,33 @@
 
   <swiper-container class="swiper-container-rounded" (slidechange)="swiperSlideChanged($event)" [loop]="true" [pagination]="true">
     <swiper-slide (click)="achat()">
-      <img style="height: 300px;" src="assets/CF.jpg">  
-      <ion-item color="dark" lines="none">
-        <ion-label class="label">Accéder à l'achat d'un véhicule:</ion-label>
-        <ion-button shape="round" class="boot" color="light" routerLink="/tabs/location-et-vente">Acheter</ion-button>
-      </ion-item>    
+      <ion-card>
+        <img class="swiper-img" src="assets/CF.jpg">  
+        <ion-item class="item-overlay" color="dark" lines="none">
+          <ion-label class="label">Accéder aux achats de véhicule:</ion-label>
+          <ion-button shape="round" class="boot" color="light" routerLink="/tabs/location-et-vente">Acheter</ion-button>
+        </ion-item> 
+      </ion-card>   
     </swiper-slide>
     <swiper-slide (click)="location()">
-      <img style="height: 300px;" src="assets/BK1.png">
-      <ion-item color="dark" lines="none">
-        <ion-label class="label">Accéder à la location d'un véhicule:</ion-label>
-        <ion-button shape="round" class="boot" color="light" routerLink="/tabs/location-et-vente">Location</ion-button>
-      </ion-item>
+      <ion-card>
+        <img class="swiper-img" src="assets/BK1.png">
+        <ion-item class="item-overlay" color="dark" lines="none">
+          <ion-label class="label">Accéder aux locations des véhicules:</ion-label>
+          <ion-button shape="round" class="boot" color="light" routerLink="/tabs/location-et-vente">Location</ion-button>
+        </ion-item>
+      </ion-card>
     </swiper-slide>
-    <swiper-slide  (click)="taxi()">
-      <img style="height: 300px;" src="assets/en traveau.gif">
-      <ion-item color="dark" lines="none">
-        <ion-label class="label">Allez commander votre Taxi:</ion-label>
-        <ion-button shape="round" class="boot" color="light" routerLink="/tabs/tab2">Taxi</ion-button>
-      </ion-item>
+    <swiper-slide (click)="taxi()">
+      <ion-card>
+        <img class="swiper-img" src="assets/taxi.jpg">
+        <ion-item class="item-overlay" color="dark" lines="none">
+          <ion-label class="label">Allez commander votre Taxi:</ion-label>
+          <ion-button shape="round" class="boot" color="light" routerLink="/tabs/tab2">Taxi</ion-button>
+        </ion-item>
+      </ion-card>
     </swiper-slide>
-  </swiper-container>
+</swiper-container>
 
  
 </ion-content>

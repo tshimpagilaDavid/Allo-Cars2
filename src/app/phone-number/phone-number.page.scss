@@ -7,7 +7,7 @@ ion-content {
 .item {
     width: 19.5rem;
     position: relative;
-    transform: translate(2%, -5%);
+    transform: translate(1%, -5%);
 }
 
 .input {
@@ -19,7 +19,7 @@ ion-content {
 
 .carre {
     width: 20rem;
-    height: 18.5rem;
+    height: 20.5rem;
     position: relative;
     top: 25%;
     left:48%;
@@ -66,12 +66,6 @@ ion-content {
     margin-left: 2px;
 }
 
-.phoneAuthGrid {
-    border: 1px solid #ccc;
-    margin: -10px;
-    border-radius: 3px;
-}
-
 .police {
     position: absolute;
     left:48%;
@@ -99,6 +93,7 @@ ion-content {
 }
   
 .logo {
+    left: -2%;
     height: 160px;
     position: relative;
     color: rgb(175, 172, 172);
