@@ -178,25 +178,27 @@
   <br>
 
   <swiper-container class="swiper-container-rounded" (slidechange)="swiperSlideChanged($event)" [loop]="true" [pagination]="true">
-    <swiper-slide (click)="achat()">
+    <swiper-slide>
       <ion-card>
-        <img class="swiper-img" src="assets/CF.jpg">  
+        <img class="swiper-img" [src]="imageUrls['postId1']" (click)="triggerFileInput('postId1')">
+        <input type="file" id="fileInput-postId1" style="display: none;" (change)="onFileSelected($event, 'postId1')"> 
         <ion-item class="item-overlay" color="dark" lines="none">
-          <ion-label class="label">Accéder aux achats de véhicule:</ion-label>
+          <ion-label class="label">Accéder à l'achat d'un véhicule:</ion-label>
           <ion-button shape="round" class="boot" color="light" routerLink="/tabs/location-et-vente">Acheter</ion-button>
         </ion-item> 
       </ion-card>   
     </swiper-slide>
-    <swiper-slide (click)="location()">
+    <swiper-slide>
       <ion-card>
-        <img class="swiper-img" src="assets/BK1.png">
+        <img class="swiper-img" [src]="imageUrls['postId2']" (click)="triggerFileInput('postId2')">
+        <input type="file" id="fileInput-postId2" style="display: none;" (change)="onFileSelected($event, 'postId2')">
         <ion-item class="item-overlay" color="dark" lines="none">
-          <ion-label class="label">Accéder aux locations des véhicules:</ion-label>
+          <ion-label class="label">Accéder à la location d'un véhicule:</ion-label>
           <ion-button shape="round" class="boot" color="light" routerLink="/tabs/location-et-vente">Location</ion-button>
         </ion-item>
       </ion-card>
     </swiper-slide>
-    <swiper-slide (click)="taxi()">
+    <swiper-slide>
       <ion-card>
         <img class="swiper-img" src="assets/taxi.jpg">
         <ion-item class="item-overlay" color="dark" lines="none">

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -6,7 +6,6 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
  
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -17,6 +16,7 @@ import { environment } from '../environments/environment';
 import { Camera } from '@ionic-native/camera/ngx';
 import { Facebook } from '@ionic-native/facebook/ngx';
 import { GoogleMaps } from '@ionic-native/google-maps/ngx';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBFwYA5g52Ctj4cb_aW bn EFuIA6Aq4bY3E3s",
@@ -30,9 +30,10 @@ const firebaseConfig = {
 }
 
 @NgModule({ 
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,AngularFireModule.initializeApp(environment.firebaseConfig),
+    GoogleMapsModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
