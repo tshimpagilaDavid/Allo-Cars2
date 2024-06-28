@@ -46,6 +46,8 @@ export class Tab1Page {
       if (user) {
         this.userEmail = user.email;
         this.loadImages();
+      }else {
+        this.loadImages();
       }
     });
   }

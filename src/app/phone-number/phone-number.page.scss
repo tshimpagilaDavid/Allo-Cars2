@@ -20,8 +20,8 @@ ion-content {
 .carre {
     width: 20rem;
     height: 20.5rem;
-    position: relative;
-    top: 25%;
+    position: absolute;
+    top: 50%;
     left:48%;
     transform: translate(-50%, -40%);
 }
@@ -102,4 +102,6 @@ ion-content {
 .label {
     font-size: 13px;
     font-weight: 720;
+    position: relative;
+    top: 30%;
 }

@@ -25,6 +25,7 @@ export class LocationEtVentePage implements OnInit {
   marque!: string;
   modele!: string;
   prix!: string;
+  fournisseur!: string;
   boite!: string;
   carburant!: string;
   kilometrage!: string;
@@ -34,6 +35,7 @@ export class LocationEtVentePage implements OnInit {
   prixjour!: string;
   boiteLoc!: string;
   carburantLoc!: string;
+  fournisseurLoc!: string;
 
   constructor(private firestore: AngularFirestore,private afAuth: AngularFireAuth) {
     this.afAuth.authState.subscribe(user => {
@@ -48,7 +50,8 @@ export class LocationEtVentePage implements OnInit {
       modeleLoc: this.modeleLoc,
       prixjour: this.prixjour,
       boiteLoc: this.boiteLoc,
-      carburantLoc: this.carburantLoc
+      carburantLoc: this.carburantLoc,
+      fournisseurLoc: this.fournisseurLoc
     }
     this.firestore.collection('carsloc').add(VoitureLocation)
     .then(() => {
@@ -68,7 +71,8 @@ export class LocationEtVentePage implements OnInit {
       boite: this.boite,
       carburant: this.carburant,
       kilometrage: this.kilometrage,
-      annee: this.annee
+      annee: this.annee,
+      fournisseur: this.fournisseur
     };
 
     this.firestore.collection('cars').add(voitureAchat)
@@ -89,11 +93,13 @@ export class LocationEtVentePage implements OnInit {
     this.carburant = '';
     this.kilometrage = '';
     this.annee = '';
+    this.fournisseur = '';
     this.marqueLoc = '';
     this.modeleLoc = '';
     this.boiteLoc = '';
     this.carburantLoc = '';
     this.prixjour = '';
+    this.fournisseurLoc = '';
   }
 
   swiperSlideChanged(e: any) {
