@@ -2,11 +2,33 @@
   display: none;
 }
 
+.item-overlay {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Ajoute une semi-transparence pour le texte */
+  color: white;
+}
+
+.item-overlay .label {
+  margin-right: -50px;
+}
+
 .label {
+  display: block; /* Assure que le label occupe toute la largeur au-dessus de la liste */
+  margin-bottom: 8px; /* Ajoute un espace entre le label et la liste */
   font-size: 14px;
   margin: 0px 0px 0px 0px;
   font-weight: 720;
   color: black;
+}
+
+.horizontal-list {
+  display: flex; /* Affiche les éléments de la liste en ligne */
+  list-style-type: disc; /* Utilise des points pour les éléments de liste */
+  padding-left: 0; /* Supprime l'indentation par défaut */
+}
+
+.horizontal-list li {
+  margin-right: 16px; /* Ajoute un espace entre les éléments de la liste */
 }
 
 .flex {
@@ -35,6 +57,16 @@
   align-items: center;
   overflow: hidden; /* Pour cacher tout ce qui dépasse des slides */
 
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%; /* Ajustez la largeur selon vos besoins */
+  height: 100%;
+  border-radius: 20px; /* Assurez-vous que les coins sont arrondis */
+  overflow: hidden;
 }
 
 /* Style pour les images dans les slides */

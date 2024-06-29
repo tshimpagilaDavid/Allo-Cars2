@@ -19,6 +19,8 @@ export class LocationEtVentePage implements OnInit {
   images: string[] = [];
   mySwiper!: Swiper;
   selectedImages: string[] = [];
+  voituresLocation: any[] = [];
+  voituresAchat: any[] = [];
   public selectedSegment: string = 'Acheter un véhicule';
   @ViewChild('slides', { static: true }) slides: any;
   userEmail: string | null = null;
@@ -53,13 +55,13 @@ export class LocationEtVentePage implements OnInit {
       carburantLoc: this.carburantLoc,
       fournisseurLoc: this.fournisseurLoc
     }
-    this.firestore.collection('carsloc').add(VoitureLocation)
+    this.firestore.collection('carsLoc').add(VoitureLocation)
     .then(() => {
-      console.log('Voiture à acheter ajoutée avec succès à Firestore');
+      console.log('Voiture à louer ajoutée avec succès à Firestore');
       this.reinitialiserChamps();
     })
     .catch(error => {
-      console.error('Erreur lors de l\'ajout de la voiture à acheter : ', error);
+      console.error('Erreur lors de l\'ajout de la voiture à louer : ', error);
     });
   }
 
@@ -115,7 +117,7 @@ export class LocationEtVentePage implements OnInit {
     setTimeout(() => {
       this.initSwiper();
     });
-
+  
     this.selectedSegment = event.detail.value;
     
     // Contrôler l'affichage des parties en fonction du segment sélectionné
@@ -177,10 +179,36 @@ export class LocationEtVentePage implements OnInit {
     });
   }
 
+  getVoituresAchat() {
+    this.firestore.collection('cars').snapshotChanges().subscribe(data => {
+      this.voituresAchat = data.map(e => {
+        const data = e.payload.doc.data() as { [key: string]: any }; // Typage explicite en tant qu'objet
+        return {
+          id: e.payload.doc.id,
+          ...data
+        };
+      });
+    });
+  }
+
+  getVoituresLocation() {
+    this.firestore.collection('carsLoc').snapshotChanges().subscribe(data => {
+      this.voituresLocation = data.map(e => {
+        const data = e.payload.doc.data() as { [key: string]: any }; // Typage explicite en tant qu'objet
+        return {
+          id: e.payload.doc.id,
+          ...data
+        };
+      });
+    });
+  }
+
   ngOnInit() {}
 
   ngAfterViewInit() {
     this.initSwiper();
+    this.getVoituresAchat();
+    this.getVoituresLocation();
   }
 
 }

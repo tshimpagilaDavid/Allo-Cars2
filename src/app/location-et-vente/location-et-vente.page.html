@@ -94,6 +94,23 @@
         <ion-button shape="round" expand="block" color="dark" (click)="VoitureAchat()">Ajouter Voiture</ion-button>
       </ion-card-content>
     </ion-card>
+    <ion-list *ngFor="let voiture of voituresAchat" lines="none">
+      <ion-card class="card">
+        <img class="swiper-img" src="assets/taxi.jpg">
+      <ion-item class="item-overlay" color="dark" lines="none">
+        <ion-label class="label">{{ voiture.marque }} {{ voiture.modele }}</ion-label>
+        <ul class="horizontal-list">
+          <li>{{ voiture.prix }}</li>
+          <li>{{ voiture.boite }}</li>
+          <li>{{ voiture.carburant }}</li>
+          <li>{{ voiture.kilometrage }}</li>
+          <li>{{ voiture.annee }}</li>
+          <li>{{ voiture.fournisseur }}</li>
+          <!-- Ajoutez d'autres détails de la voiture ici -->
+        </ul>
+      </ion-item>
+      </ion-card>
+    </ion-list>
   </div>
 
   <div *ngIf="showContent && !showAchatContent">
@@ -155,6 +172,20 @@
         <ion-button shape="round" expand="block" color="dark" (click)="VoitureLocation()">Ajouter Voiture</ion-button>
       </ion-card-content>
     </ion-card>
+    <ion-list lines="none">
+      <ion-card *ngFor="let voiture of voituresLocation">
+        <img class="swiper-img" src="assets/taxi.jpg">
+    <ion-item class="item-overlay" color="dark" lines="none">
+      <ion-label class="label">{{ voiture.marqueLoc }} {{ voiture.modeleLoc }}</ion-label>
+      <ul>
+        <li>{{ voiture.prixjour }}</li>
+        <li>{{ voiture.boiteLoc }}</li>
+        <li>{{ voiture.carburantLoc }}</li>
+        <li>{{ voiture.fournisseurLoc }}</li>
+      </ul>
+    </ion-item>
+      </ion-card>
+    </ion-list>
   </div>
 
 </ion-content>
