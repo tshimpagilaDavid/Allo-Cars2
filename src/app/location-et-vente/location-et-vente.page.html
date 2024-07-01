@@ -7,8 +7,8 @@
 </ion-header>
 
 <ion-content>
-    <h1>Bienvenue!</h1>
-    <p>Dans le service d'achat et location.</p>
+    <h1>Bienvenue !</h1>
+    <p>Dans le service d'achat et de location. Vous trouverez des véhicules provenant de particulier ou de concessionaire agrées.</p>
     <br>
     <ion-segment (ionChange)="segmentChanged($event)" value="Acheter un véhicule">
       <ion-segment-button value="Acheter un véhicule">
@@ -97,18 +97,25 @@
     <ion-list *ngFor="let voiture of voituresAchat" lines="none">
       <ion-card class="card">
         <img class="swiper-img" src="assets/taxi.jpg">
-      <ion-item class="item-overlay" color="dark" lines="none">
-        <ion-label class="label">{{ voiture.marque }} {{ voiture.modele }}</ion-label>
-        <ul class="horizontal-list">
-          <li>{{ voiture.prix }}</li>
-          <li>{{ voiture.boite }}</li>
-          <li>{{ voiture.carburant }}</li>
-          <li>{{ voiture.kilometrage }}</li>
-          <li>{{ voiture.annee }}</li>
-          <li>{{ voiture.fournisseur }}</li>
-          <!-- Ajoutez d'autres détails de la voiture ici -->
-        </ul>
-      </ion-item>
+        <ion-item style="width:100%;" color="dark" lines="none">
+          <div class="content">
+            <ion-label class="label marque">
+              <span style="font-size: large;" class="inline">{{ voiture.marque }}</span>
+              <span style="font-size: large;" class="inline">{{ voiture.modele }}</span>
+              <span style="font-size: large;" class="inline">{{ voiture.annee }}</span>
+            </ion-label>
+            <ul class="horizontal-list">
+              <li>{{ voiture.boite }}</li>
+              <li>{{ voiture.carburant }}</li>
+              <li>{{ voiture.kilometrage }}Km</li>
+              <!-- Ajoutez d'autres détails de la voiture ici -->
+            </ul>
+            <ion-label class="label price">
+              <span class="inline" style="color: #208715;">{{ voiture.prix }} Fcfa</span>
+              <span class="inline" style="font-size: 14px;">{{ voiture.fournisseur }}</span>
+            </ion-label>
+          </div>
+        </ion-item>
       </ion-card>
     </ion-list>
   </div>
@@ -172,18 +179,25 @@
         <ion-button shape="round" expand="block" color="dark" (click)="VoitureLocation()">Ajouter Voiture</ion-button>
       </ion-card-content>
     </ion-card>
-    <ion-list lines="none">
-      <ion-card *ngFor="let voiture of voituresLocation">
+    <ion-list lines="none" *ngFor="let voiture of voituresLocation">
+      <ion-card class="card">
         <img class="swiper-img" src="assets/taxi.jpg">
-    <ion-item class="item-overlay" color="dark" lines="none">
-      <ion-label class="label">{{ voiture.marqueLoc }} {{ voiture.modeleLoc }}</ion-label>
-      <ul>
-        <li>{{ voiture.prixjour }}</li>
-        <li>{{ voiture.boiteLoc }}</li>
-        <li>{{ voiture.carburantLoc }}</li>
-        <li>{{ voiture.fournisseurLoc }}</li>
-      </ul>
-    </ion-item>
+<ion-item style="width:100%;" color="dark" lines="none">
+  <div class="content">
+    <ion-label class="label marque">
+      <span style="font-size: large;" class="inline">{{ voiture.marqueLoc }}</span>
+      <span style="font-size: large;" class="inline">{{ voiture.modeleLoc }}</span>
+    </ion-label>
+    <ul class="horizontal-list">
+      <li>{{ voiture.boiteLoc }}</li>
+      <li>{{ voiture.carburantLoc }}</li>
+    </ul>
+    <ion-label class="label price">
+      <span class="inline" style="color: #208715;">{{ voiture.prixjour }} Fcfa/Jour</span>
+      <span class="inline" style="font-size: 14px;">{{ voiture.fournisseurLoc }}</span>
+    </ion-label>
+  </div>
+</ion-item>
       </ion-card>
     </ion-list>
   </div>
