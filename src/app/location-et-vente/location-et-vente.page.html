@@ -26,14 +26,9 @@
       <ion-card-content>
         <div class="swiper-container" #slides>
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="assets/hyundai_palisade_2020_4k-HD.jpg">
-            </div>
-            <div class="swiper-slide">
-              <img src="assets/hyundai_palisade_2020_4k-HD.jpg">
-            </div>
-            <div class="swiper-slide">
-              <img src="assets/hyundai_palisade_2020_4k-HD.jpg">
+            <div class="swiper-slide" *ngFor="let img of defaultImages; let i = index">
+              <img *ngIf="!selectedImages[i] || (selectedImages[i])" [src]="selectedImages[i] || img" (click)="triggerFileInput(i)">
+              <input #fileInput type="file" accept="image/*" (change)="onFileSelected($event, i)" class="file-input">
             </div>
           </div>
           <div class="swiper-pagination"></div>
@@ -96,7 +91,7 @@
     </ion-card>
     <ion-list *ngFor="let voiture of voituresAchat" lines="none">
       <ion-card class="card">
-        <img class="swiper-img" src="assets/taxi.jpg">
+        <img class="swiper-img" [src]="voiture.images[0]">
         <ion-item style="width:100%;" color="dark" lines="none">
           <div class="content">
             <ion-label class="label marque">
@@ -126,14 +121,9 @@
       <ion-card-content>
         <div class="swiper-container" #slides>
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="assets/hyundai_palisade_2020_4k-HD.jpg">
-            </div>
-            <div class="swiper-slide">
-              <img src="assets/hyundai_palisade_2020_4k-HD.jpg">
-            </div>
-            <div class="swiper-slide">
-              <img src="assets/hyundai_palisade_2020_4k-HD.jpg">
+            <div class="swiper-slide" *ngFor="let img of defaultImages; let i = index">
+              <img *ngIf="!selectedImages[i] || (selectedImages[i])" [src]="selectedImages[i] || img" (click)="triggerFileInput(i)">
+              <input #fileInput type="file" accept="image/*" (change)="onFileSelected($event, i)" class="file-input">
             </div>
           </div>
           <div class="swiper-pagination"></div>
@@ -181,7 +171,7 @@
     </ion-card>
     <ion-list lines="none" *ngFor="let voiture of voituresLocation">
       <ion-card class="card">
-        <img class="swiper-img" src="assets/taxi.jpg">
+        <img class="swiper-img" [src]="voiture.images[0]">
 <ion-item style="width:100%;" color="dark" lines="none">
   <div class="content">
     <ion-label class="label marque">

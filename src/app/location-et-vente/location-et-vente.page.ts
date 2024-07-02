@@ -1,28 +1,33 @@
-import { Component, ElementRef, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { register } from 'swiper/element/bundle';
-register();
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import Swiper from 'swiper';
-import { Observable } from 'rxjs';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-location-et-vente',
   templateUrl: './location-et-vente.page.html',
   styleUrls: ['./location-et-vente.page.scss'],
 })
-export class LocationEtVentePage implements OnInit {
-  segmentButtonColor: string = 'Acheter un véhicule';
+export class LocationEtVentePage {
   showContent: boolean = true;
-  showAchatContent: boolean = true; 
+  showAchatContent: boolean = true;
   images: string[] = [];
+  defaultImages: string[] = [
+    'assets/gallery.jpg',
+    'assets/gallery.jpg',
+    'assets/gallery.jpg',
+    'assets/gallery.jpg',
+    'assets/gallery.jpg',
+  ];
   mySwiper!: Swiper;
-  selectedImages: string[] = [];
+  selectedImages: (string | SafeResourceUrl)[] = [];
   voituresLocation: any[] = [];
   voituresAchat: any[] = [];
   public selectedSegment: string = 'Acheter un véhicule';
   @ViewChild('slides', { static: true }) slides: any;
+  @ViewChildren('fileInput') fileInputs!: QueryList<ElementRef>;
   userEmail: string | null = null;
   marque!: string;
   modele!: string;
@@ -39,21 +44,22 @@ export class LocationEtVentePage implements OnInit {
   carburantLoc!: string;
   fournisseurLoc!: string;
 
-  constructor(private firestore: AngularFirestore,private afAuth: AngularFireAuth) {
+  constructor(private sanitizer: DomSanitizer, private firestore: AngularFirestore,private afAuth: AngularFireAuth,private storage: AngularFireStorage) {
     this.afAuth.authState.subscribe(user => {
       // Mettre à jour l'adresse e-mail de l'utilisateur
       this.userEmail = user ? user.email : null;
     });
   }
 
-  VoitureLocation(): void {
+  async VoitureLocation(): Promise<void> {
     const VoitureLocation = {
       marqueLoc: this.marqueLoc,
       modeleLoc: this.modeleLoc,
       prixjour: this.prixjour,
       boiteLoc: this.boiteLoc,
       carburantLoc: this.carburantLoc,
-      fournisseurLoc: this.fournisseurLoc
+      fournisseurLoc: this.fournisseurLoc,
+      images: this.selectedImages.map(img => img.toString())
     }
     this.firestore.collection('carsLoc').add(VoitureLocation)
     .then(() => {
@@ -65,7 +71,7 @@ export class LocationEtVentePage implements OnInit {
     });
   }
 
-  VoitureAchat(): void {
+  async VoitureAchat(): Promise<void> {
     const voitureAchat = {
       marque: this.marque,
       modele: this.modele,
@@ -74,17 +80,17 @@ export class LocationEtVentePage implements OnInit {
       carburant: this.carburant,
       kilometrage: this.kilometrage,
       annee: this.annee,
-      fournisseur: this.fournisseur
+      fournisseur: this.fournisseur,
+      images: this.selectedImages.map(img => img.toString())
     };
 
-    this.firestore.collection('cars').add(voitureAchat)
-      .then(() => {
-        console.log('Voiture à acheter ajoutée avec succès à Firestore');
-        this.reinitialiserChamps();
-      })
-      .catch(error => {
-        console.error('Erreur lors de l\'ajout de la voiture à acheter : ', error);
-      });
+    try {
+      await this.firestore.collection('cars').add(voitureAchat);
+      console.log('Voiture à acheter ajoutée avec succès à Firestore');
+      this.reinitialiserChamps();
+    } catch (error) {
+      console.error('Erreur lors de l\'ajout de la voiture à acheter : ', error);
+    }
   }
 
   reinitialiserChamps(): void {
@@ -102,6 +108,7 @@ export class LocationEtVentePage implements OnInit {
     this.carburantLoc = '';
     this.prixjour = '';
     this.fournisseurLoc = '';
+    this.selectedImages = [];
   }
 
   swiperSlideChanged(e: any) {
@@ -135,9 +142,10 @@ export class LocationEtVentePage implements OnInit {
   }
 
   selectImage(imageIndex: number) {
-    const selectedImage = this.images[imageIndex]; // Accédez à la variable images à partir de l'instance de la classe avec 'this.'
-    this.selectedImages.push(selectedImage);
+    const selectedImage = this.selectedImages[imageIndex];
+    this.selectedImages = [selectedImage];
   }
+
   initSwiper () {
     const mySwiper = new Swiper('.swiper-container', {
       direction: 'horizontal',
@@ -201,6 +209,28 @@ export class LocationEtVentePage implements OnInit {
         };
       });
     });
+  }
+
+  isVideo(image: string | SafeResourceUrl): boolean {
+    return typeof image === 'string' && image.includes('video');
+  }
+
+  onFileSelected(event: any, index: number): void {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      const url = reader.result?.toString();
+      if (url) {
+        this.selectedImages[index] = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+      }
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
+
+  triggerFileInput(index: number): void {
+    this.fileInputs.toArray()[index].nativeElement.click();
   }
 
   ngOnInit() {}
